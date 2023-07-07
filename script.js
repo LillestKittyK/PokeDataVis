@@ -1,6 +1,8 @@
 var acc = document.getElementsByClassName("accordion");
 var i;
 var currentlyOpen = null;
+let chartCreated = 0;
+let myChart = null;
 
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
@@ -50,7 +52,7 @@ fetch('poke/pokedex.json')
 
         const links = roundedBox.querySelectorAll('a');
         links.forEach(link => {
-          link.addEventListener('click', function(event) {
+          link.addEventListener('click', function (event) {
             event.preventDefault();
             const pokemonId = Number(this.dataset.id);
             const pokemon = data.find(item => item.id === pokemonId);
@@ -65,14 +67,70 @@ fetch('poke/pokedex.json')
 
     function displayPokemonInfo(pokemon) {
       const displayElement = document.querySelector('.display-pokemon');
-      displayElement.innerHTML = `
-        <h2>${pokemon.name.english}</h2>
-        <p>HP: ${pokemon.base.HP}</p>
-        <p>Attack: ${pokemon.base.Attack}</p>
-        <p>Defense: ${pokemon.base.Defense}</p>
-        <p>Speed: ${pokemon.base.Speed}</p>
-        <img src="${pokemon.image.thumbnail}" alt="">
-      `;
+      
+      let canvasElement = document.getElementById('myChart'); // Get existing canvas element
+
+      if (pokemon.base) {
+        console.log(`'chart created is ${chartCreated}'`)
+        chartCreated = 1;
+
+        displayElement.innerHTML = `
+          <div class="display-header">
+            <h3>${pokemon.name.english}</h3>
+          </div>
+          <p id="hp">HP: ${pokemon.base.HP}</p>
+          <p id="attack">Attack: ${pokemon.base.Attack}</p>
+          <p id="defense">Defense: ${pokemon.base.Defense}</p>
+          <p id="speed">Speed: ${pokemon.base.Speed}</p>
+          <img src="${pokemon.image.thumbnail}" alt="">
+          <canvas id="myChart"></canvas>
+        `;
+
+        if (myChart) {
+          myChart.destroy();
+        }
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        myChart = new Chart(ctx, {
+
+          type: 'bar',
+          data: {
+            labels: ['HP', 'Attack', 'Defense', 'Speed'],
+            datasets: [{
+              label: pokemon.name.english,
+              data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+        
+
+
+        
+
+
+
+        
+        
+      }
+      else {
+        displayElement.innerHTML = `
+          <div class="display-header">
+            <h3>${pokemon.name.english}</h3>
+          </div>
+          <p>No data available</p>
+          <img src="${pokemon.image.thumbnail}" alt="">
+        `;
+      }
     }
   })
   .catch(error => {
