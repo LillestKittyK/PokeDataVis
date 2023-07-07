@@ -40,12 +40,26 @@ fetch('poke/pokedex.json')
       const searchInput = document.getElementById('search').value.toLowerCase();
       const matchedPokemon = data.filter(item => item.name.english.toLowerCase().includes(searchInput));
       const roundedBox = document.querySelector('.rounded-box');
+      const panel = document.querySelector(".panel");
+
+      // Calculate the new height based on the rounded box height
+      const newHeight = roundedBox.offsetHeight + 30 + "px";
+
+      // Update the height of the panel
+      panel.style.maxHeight = newHeight;
 
       if (matchedPokemon.length > 0) {
-        const listItems = matchedPokemon.map(item => {
+
+        let listItems = matchedPokemon.slice(0, 8).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           return `<li><a href="#" data-id="${pokemonData[0]}">${pokemonData[1]}</a></li>`;
         }).join('');
+
+        if (matchedPokemon.length > 8) {
+          listItems += '<li>Too many results...</li>';
+        }
+
+
 
         const numResults = matchedPokemon.length;
         roundedBox.innerHTML = `<p>${numResults} result${numResults > 1 ? 's' : ''} found</p><ul>${listItems}</ul>`;
@@ -67,6 +81,7 @@ fetch('poke/pokedex.json')
 
     function displayPokemonInfo(pokemon) {
       const displayElement = document.querySelector('.display-pokemon');
+      displayElement.style.backgroundColor = getColorForType(pokemon.type[0]);
 
       let canvasElement = document.getElementById('myChart'); // Get existing canvas element
 
@@ -74,14 +89,17 @@ fetch('poke/pokedex.json')
         console.log(`'chart created is ${chartCreated}'`)
         chartCreated = 1;
 
+        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+
         displayElement.innerHTML = `
-          <div class="display-header">
-            <h3>${pokemon.name.english}</h3>
-          </div>
-          
-          <img src="${pokemon.image.thumbnail}" alt="">
-          <canvas id="myChart"></canvas>
-        `;
+      <div class="display-header">
+        <h3>${pokemon.name.english}</h3>
+      </div>
+      <div class="type-images">${typeImages}</div> <!-- Display the type images -->
+
+      <img src="${pokemon.image.thumbnail}" alt="">
+      <canvas id="myChart"></canvas>
+    `;
 
         if (myChart) {
           myChart.destroy();
@@ -128,15 +146,6 @@ fetch('poke/pokedex.json')
           }
         });
 
-
-
-
-
-
-
-
-
-
       }
       else {
         displayElement.innerHTML = `
@@ -152,3 +161,65 @@ fetch('poke/pokedex.json')
   .catch(error => {
     console.error('Error:', error);
   });
+
+function getColorForType(type) {
+  switch (type.toLowerCase()) {
+    case 'grass':
+      return 'rgba(120, 200, 80, 0.5)'; // Green
+    case 'fire':
+      return 'rgba(240, 128, 48, 0.5)'; // Orange
+    case 'water':
+      return 'rgba(104, 144, 240, 0.5)'; // Blue
+    case 'electric':
+      return 'rgba(248, 208, 48, 0.5)'; // Yellow
+    case 'bug':
+      return 'rgba(168, 184, 32, 0.5)'; // Olive
+    case 'normal':
+      return 'rgba(168, 168, 120, 0.5)'; // Light Gray
+    case 'poison':
+      return 'rgba(160, 64, 160, 0.5)'; // Purple
+    case 'ground':
+      return 'rgba(224, 192, 104, 0.5)'; // Brown
+    case 'fairy':
+      return 'rgba(238, 153, 172, 0.5)'; // Pink
+    case 'fighting':
+      return 'rgba(192, 48, 40, 0.5)'; // Red
+    case 'psychic':
+      return 'rgba(248, 88, 136, 0.5)'; // Pink
+    case 'rock':
+      return 'rgba(184, 160, 56, 0.5)'; // Gray
+    case 'ghost':
+      return 'rgba(112, 88, 152, 0.5)'; // Purple
+    case 'ice':
+      return 'rgba(152, 216, 216, 0.5)'; // Light Blue
+    case 'dragon':
+      return 'rgba(112, 56, 248, 0.5)'; // Dark Blue
+    case 'steel':
+      return 'rgba(184, 184, 208, 0.5)'; // Silver
+    case 'dark':
+      return 'rgba(112, 88, 72, 0.5)'; // Dark Gray
+    case 'flying':
+      return 'rgba(168, 144, 240, 0.5)'; // Light Blue
+    default:
+      return 'rgba(0, 0, 0, 0.5)'; // Default color
+  }
+}
+
+function toggleAccordion(header) {
+  const accordion = header.parentElement;
+  const panel = accordion.querySelector(".panel");
+
+  if (panel.style.maxHeight) {
+    panel.style.maxHeight = null;
+    accordion.classList.remove("expanded");
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+    accordion.classList.add("expanded");
+
+    // Calculate the new height based on 80% of the viewport height
+    const newHeight = Math.floor(window.innerHeight * 0.8) + "px";
+
+    // Update the height of the accordion content
+    panel.style.maxHeight = newHeight;
+  }
+}

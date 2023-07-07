@@ -56,10 +56,15 @@ ul {
   transition: max-height 0.2s ease-out;
   /* add more space at the bottom */
   padding-bottom: 0px;
+  border-bottom: 1px solid black;
+  height: 80vh;
 
 }
 
-
+.types {
+  margin: 0;
+  padding: 0;
+}
 
 .rounded-box {
   
@@ -80,8 +85,18 @@ ul {
   font-size: 0.9rem;
 }
 
-.rounded-box > h3 {
+.display-header > h3 {
+  margin-top: 5px;
+}
+
+#types {
+  width: 100px;
+}
+
+.types > h3 {
   margin: 0 5px;
+  margin-top: 0px;
+  padding: 0;
 }
 
 .display-pokemon {
@@ -145,7 +160,7 @@ ul {
 }
 
 .display-header {
-  background-color: rgb(216, 216, 216);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 60px;
   border-bottom: 1px solid #a3a3a3;
@@ -155,4 +170,9 @@ ul {
   font-weight: bold;
   text-shadow: 1px 1px 1px #a3a3a3;
   
+}
+
+#myChart {
+  background-color: rgba(255,255,255,0.6);
+  border-top: 1px solid #a3a3a3;
 }
