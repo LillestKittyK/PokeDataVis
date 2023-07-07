@@ -55,11 +55,24 @@ fetch('poke/pokedex.json')
             const pokemonId = Number(this.dataset.id);
             const pokemon = data.find(item => item.id === pokemonId);
             console.log(pokemon);
+            displayPokemonInfo(pokemon);
           });
         });
       } else {
         roundedBox.innerHTML = 'No pokemon found';
       }
+    }
+
+    function displayPokemonInfo(pokemon) {
+      const displayElement = document.querySelector('.display-pokemon');
+      displayElement.innerHTML = `
+        <h2>${pokemon.name.english}</h2>
+        <p>HP: ${pokemon.base.HP}</p>
+        <p>Attack: ${pokemon.base.Attack}</p>
+        <p>Defense: ${pokemon.base.Defense}</p>
+        <p>Speed: ${pokemon.base.Speed}</p>
+        <img src="${pokemon.image.thumbnail}" alt="">
+      `;
     }
   })
   .catch(error => {
