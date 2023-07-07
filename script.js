@@ -67,7 +67,7 @@ fetch('poke/pokedex.json')
 
     function displayPokemonInfo(pokemon) {
       const displayElement = document.querySelector('.display-pokemon');
-      
+
       let canvasElement = document.getElementById('myChart'); // Get existing canvas element
 
       if (pokemon.base) {
@@ -78,10 +78,7 @@ fetch('poke/pokedex.json')
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
           </div>
-          <p id="hp">HP: ${pokemon.base.HP}</p>
-          <p id="attack">Attack: ${pokemon.base.Attack}</p>
-          <p id="defense">Defense: ${pokemon.base.Defense}</p>
-          <p id="speed">Speed: ${pokemon.base.Speed}</p>
+          
           <img src="${pokemon.image.thumbnail}" alt="">
           <canvas id="myChart"></canvas>
         `;
@@ -92,7 +89,6 @@ fetch('poke/pokedex.json')
 
         const ctx = document.getElementById('myChart').getContext('2d');
         myChart = new Chart(ctx, {
-
           type: 'bar',
           data: {
             labels: ['HP', 'Attack', 'Defense', 'Speed'],
@@ -109,18 +105,38 @@ fetch('poke/pokedex.json')
               y: {
                 beginAtZero: true
               }
+            },
+            plugins: {
+              afterDraw: function (chart) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                  var meta = chart.getDatasetMeta(i);
+                  if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                      // Draw the value inside the bar
+                      var data = dataset.data[index];
+                      ctx.fillStyle = 'black';
+                      ctx.font = '12px Open Sans';
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
+                      ctx.fillText(data, element.x, element.y - 10);
+                    });
+                  }
+                });
+              }
             }
           }
         });
-        
-
-
-        
 
 
 
-        
-        
+
+
+
+
+
+
+
       }
       else {
         displayElement.innerHTML = `
