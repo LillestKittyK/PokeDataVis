@@ -36,7 +36,89 @@ fetch('poke/pokedex.json')
 
     document.getElementById('search').addEventListener('keyup', searchPokemon);
 
-    
+    function countOccurrences() {
+
+      const typeCount = {};
+
+      for (const entry of data) {
+        for (const type of entry.type) {
+          typeCount[type] = (typeCount[type] || 0) + 1;
+        }
+      }
+
+
+      return typeCount;
+
+    }
+
+    let typeCount = countOccurrences();
+    const canvas = document.getElementById('statGraph');
+    const typeNames = Object.keys(typeCount);
+    const typeCounts = Object.values(typeCount);
+
+    const typeColors = {
+      'Grass': getColorForType('grass'),
+      'Fire': getColorForType('fire'),
+      'Water': getColorForType('water'),
+      'Electric': getColorForType('electric'),
+      'Bug': getColorForType('bug'),
+      'Normal': getColorForType('normal'),
+      'Poison': getColorForType('poison'),
+      'Ground': getColorForType('ground'),
+      'Fairy': getColorForType('fairy'),
+      'Fighting': getColorForType('fighting'),
+      'Psychic': getColorForType('psychic'),
+      'Rock': getColorForType('rock'),
+      'Ghost': getColorForType('ghost'),
+      'Ice': getColorForType('ice'),
+      'Dragon': getColorForType('dragon'),
+      'Steel': getColorForType('steel'),
+      'Dark': getColorForType('dark'),
+      'Flying': getColorForType('flying')
+    };
+    console.log(typeColors);
+
+    const pieChart = new Chart(canvas, {
+      type: 'pie',
+      data: {
+        labels: typeNames,
+        datasets: [{
+          data: typeCounts,
+          backgroundColor: typeNames.map(type => `rgba(${typeColors[type]}, 0.6)`)
+
+        }]
+      },
+      options: {
+        // Customize chart options as needed
+      }
+    });
+
+    canvas.addEventListener('click', handleClick);
+
+    function handleClick(event) {
+      const selectedPokemonWindow = document.querySelector('.selectedPokemon');
+      const points = pieChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+
+      if (points.length) {
+        const firstPoint = points[0];
+        const selectedIndex = firstPoint.index;
+        const selectedType = typeNames[selectedIndex];
+        console.log(selectedType);
+        const selectedPokemon = getPokemonByType(selectedType);
+        const selectedBGColor = getColorForType(selectedType);
+        const selectedSprites = selectedPokemon.slice(0,39).map(pokemon => `<img src="${pokemon.image.sprite}" alt="${pokemon.name.english}" title="${pokemon.name.english}" style='width: 37px'>`);
+        selectedPokemonWindow.innerHTML = selectedSprites.join(' ');
+        selectedPokemonWindow.style.backgroundColor = `rgba(${selectedBGColor},0.2)`
+        selectedPokemonWindow.style.boxShadow = `0px 0px 10px rgba(${selectedBGColor},0.8)`
+        // set the background color of the window to that type of pokemon, but with opacity 0.2
+
+      
+      }
+    }
+
+    function getPokemonByType(type) {
+      return data.filter(item => item.type.includes(type));
+    }
 
     function searchPokemon() {
       const searchInput = document.getElementById('search').value.toLowerCase();
@@ -465,6 +547,7 @@ fetch('poke/pokedex.json')
   });
 
 function getColorForType(type) {
+  console.log(type);
   switch (type.toLowerCase()) {
     case 'grass':
       return '120, 200, 80'; // Green
