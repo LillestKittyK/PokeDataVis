@@ -32,9 +32,11 @@ fetch('poke/pokedex.json')
 
       if (matchedPokemon.length > 0) {
 
-        let listItems = matchedPokemon.slice(0, 15).map(item => {
+        let listItems = matchedPokemon.slice(0, 10).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
-          return `<li><a href="#" data-id="${pokemonData[0]}">${pokemonData[1]}</a></li>`;
+          let textColor = getColorForType(data[pokemonData[0]-1].type[0]);
+          console.log(textColor);
+          return `<li ><a href="#" data-id="${pokemonData[0]}" style='color:rgb(${(textColor)}); background-color: rgba(${textColor}, 0.1); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
         }).join('');
 
         if (matchedPokemon.length > 8) {
@@ -423,12 +425,16 @@ fetch('poke/pokedex.json')
 
       }
       else {
+        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
         displayElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
           </div>
-          <p>No data available</p>
-          <img src="${pokemon.image.thumbnail}" alt="">
+          <div class="images">
+            <div class="type-images">${typeImages}</div>
+            <img src="${pokemon.image.thumbnail}" alt="">
+            
+          </div>
         `;
       }
     }
