@@ -1,4 +1,7 @@
 var acc = document.getElementsByClassName("accordion");
+const searchContainer = document.querySelector('#content');
+const statDistContainer = document.querySelector('.statDistWindow');
+
 
 var i;
 var currentlyOpen = null;
@@ -6,6 +9,18 @@ let chartCreated = 0;
 let myChart = null;
 let evolveChart = null;
 
+const searchButton = document.querySelector('#searchBtn');
+const statDistButton = document.querySelector('#statBtn');
+
+searchButton.addEventListener('click', function (event) {
+  searchContainer.style.display = 'flex';
+  statDistContainer.style.display = 'none';
+});
+
+statDistButton.addEventListener('click', function (event) {
+  searchContainer.style.display = 'none';
+  statDistContainer.style.display = 'flex';
+});
 
 
 const startTime = performance.now();
@@ -21,6 +36,8 @@ fetch('poke/pokedex.json')
 
     document.getElementById('search').addEventListener('keyup', searchPokemon);
 
+    
+
     function searchPokemon() {
       const searchInput = document.getElementById('search').value.toLowerCase();
       const matchedPokemon = data.filter(item => item.name.english.toLowerCase().includes(searchInput));
@@ -34,7 +51,7 @@ fetch('poke/pokedex.json')
 
         let listItems = matchedPokemon.slice(0, 10).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
-          let textColor = getColorForType(data[pokemonData[0]-1].type[0]);
+          let textColor = getColorForType(data[pokemonData[0] - 1].type[0]);
           console.log(textColor);
           return `<li ><a href="#" data-id="${pokemonData[0]}" style='color:rgb(${(textColor)}); background-color: rgba(${textColor}, 0.1); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
         }).join('');
@@ -84,13 +101,13 @@ fetch('poke/pokedex.json')
       const prevElement = document.querySelector('#prev');
       const nextElement = document.querySelector('#next');
       const container = document.querySelector('#content');
-      
+
       const iconContainer = document.querySelector('.icon');
       const lineContainer = document.querySelector('.lineContainer');
       let bgColor = getColorForType(pokemon.type[0]);
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
-    
+
       iconContainer.innerHTML = `<img src='images/icon${pokemon.type[0]}.png'></img>`
 
       prevElement.style.backgroundColor = 'transparent';

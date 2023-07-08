@@ -13,7 +13,7 @@
 <body>
     <div class="sidebar">
         <div class="searchBar">
-            <button class="accordion">Search</button>
+            <button class="accordion" id="searchBtn">Search</button>
             <div class="panel">
                 <div class="search-container">
                     <input type="text" placeholder="Search" id="search">
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </div>
-
-        
-
+        <div class="statDist">
+            <button class="accordion" id="statBtn">Stat Dist</button>
+        </div>
         
     </div>
     <div id="content">
@@ -50,6 +50,15 @@
             </div>
         </div>
         <!-- <canvas id="myChart"></canvas> -->
+    </div>
+    <div class="statDistWindow">
+        <div class="graphBox">
+            
+            <canvas id="statGraph"></canvas>
+        </div>
+        <div class="selectedPokemon">
+            Hello
+        </div>
     </div>
     <script src="script.js"></script>
     
