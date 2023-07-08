@@ -84,10 +84,14 @@ fetch('poke/pokedex.json')
       const prevElement = document.querySelector('#prev');
       const nextElement = document.querySelector('#next');
       const container = document.querySelector('#content');
+      
+      const iconContainer = document.querySelector('.icon');
       const lineContainer = document.querySelector('.lineContainer');
       let bgColor = getColorForType(pokemon.type[0]);
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
+    
+      iconContainer.innerHTML = `<img src='images/icon${pokemon.type[0]}.png'></img>`
 
       prevElement.style.backgroundColor = 'transparent';
       nextElement.style.backgroundColor = 'transparent';
