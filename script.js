@@ -5,24 +5,7 @@ var currentlyOpen = null;
 let chartCreated = 0;
 let myChart = null;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function () {
-    if (currentlyOpen && currentlyOpen !== this) {
-      currentlyOpen.classList.remove("active");
-      currentlyOpen.nextElementSibling.style.maxHeight = null;
-    }
 
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-
-    currentlyOpen = this.classList.contains("active") ? this : null;
-  });
-}
 
 const startTime = performance.now();
 
@@ -44,10 +27,7 @@ fetch('poke/pokedex.json')
       const panel = document.querySelector(".panel");
 
       // Calculate the new height based on the rounded box height
-      const newHeight = roundedBox.offsetHeight + 30 + "px";
-
-      // Update the height of the panel
-      panel.style.maxHeight = newHeight;
+      
 
       if (matchedPokemon.length > 0) {
 
@@ -415,21 +395,4 @@ function findPokemonFromJson(id) {
 
 }
 
-function toggleAccordion(header) {
-  const accordion = header.parentElement;
-  const panel = accordion.querySelector(".panel");
 
-  if (panel.style.maxHeight) {
-    panel.style.maxHeight = null;
-    accordion.classList.remove("expanded");
-  } else {
-    panel.style.maxHeight = panel.scrollHeight + "px";
-    accordion.classList.add("expanded");
-
-    // Calculate the new height based on 80% of the viewport height
-    const newHeight = Math.floor(window.innerHeight * 0.8) + "px";
-
-    // Update the height of the accordion content
-    panel.style.maxHeight = newHeight;
-  }
-}
