@@ -12,12 +12,14 @@
 
 <body>
     <div class="sidebar">
-        <button class="accordion">Search</button>
-        <div class="panel">
-            <div class="search-container">
-                <input type="text" placeholder="Search" id="search">
-                <div class="rounded-box">
-                    Search in the box above to find a Pokemon!
+        <div class="searchBar">
+            <button class="accordion">Search</button>
+            <div class="panel">
+                <div class="search-container">
+                    <input type="text" placeholder="Search" id="search">
+                    <div class="rounded-box">
+                        Search in the box above to find a Pokemon!
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +41,9 @@
         <div class="display-pokemon" id="next">
 
         </div>
-        <canvas id="evolution"></canvas>
+        <div class="lineContainer">
+            <canvas id="evolution"></canvas>
+        </div>
         <!-- <canvas id="myChart"></canvas> -->
     </div>
     <script src="script.js"></script>

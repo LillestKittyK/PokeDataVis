@@ -4,6 +4,7 @@ var i;
 var currentlyOpen = null;
 let chartCreated = 0;
 let myChart = null;
+let evolveChart = null;
 
 
 
@@ -27,11 +28,11 @@ fetch('poke/pokedex.json')
       const panel = document.querySelector(".panel");
 
       // Calculate the new height based on the rounded box height
-      
+
 
       if (matchedPokemon.length > 0) {
 
-        let listItems = matchedPokemon.slice(0, 8).map(item => {
+        let listItems = matchedPokemon.slice(0, 15).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           return `<li><a href="#" data-id="${pokemonData[0]}">${pokemonData[1]}</a></li>`;
         }).join('');
@@ -65,20 +66,27 @@ fetch('poke/pokedex.json')
       let next = false;
       let prevData;
       let nextData;
+      let currentData;
+      currentData = pokemon;
       let prevName;
       let nextName;
       let myChart = null;
       let myChartNext = null;
       let myChartPrev = null;
+
+      let prevStats;
+      let nextStats;
       let entry;
       const displayElement = document.querySelector('#current');
+      const evolveChartElement = document.querySelector('#evolution');
       const prevElement = document.querySelector('#prev');
       const nextElement = document.querySelector('#next');
       const container = document.querySelector('#content');
-      const bgColor = getColorForType(pokemon.type[0]);
+      const lineContainer = document.querySelector('.lineContainer');
+      let bgColor = getColorForType(pokemon.type[0]);
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
-      
+
       prevElement.style.backgroundColor = 'transparent';
       nextElement.style.backgroundColor = 'transparent';
       prevElement.style.boxShadow = 'none';
@@ -188,6 +196,7 @@ fetch('poke/pokedex.json')
         if (next) {
           console.log(nextData);
           pokemon = nextData;
+          bgColor = getColorForType(pokemon.type[0]);
           nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
           nextElement.style.boxShadow = "2px 2px 10px #cacaca";
           nextElement.style.border = "1px solid #ccc";
@@ -253,6 +262,7 @@ fetch('poke/pokedex.json')
         if (prev) {
           console.log(prevData);
           pokemon = prevData;
+          bgColor = getColorForType(pokemon.type[0]);
           prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
           prevElement.style.boxShadow = "2px 2px 10px #cacaca";
           prevElement.style.border = "1px solid #ccc";
@@ -316,9 +326,99 @@ fetch('poke/pokedex.json')
           });
         }
 
+        console.log(prevData);
+        if (prevData) { prevStats = [prevData.base.HP, prevData.base.Attack, prevData.base.Defense, prevData.base.Speed]; }
+        let currentStats = [currentData.base.HP, currentData.base.Attack, currentData.base.Defense, currentData.base.Speed];
+        if (nextData) { nextStats = [nextData.base.HP, nextData.base.Attack, nextData.base.Defense, nextData.base.Speed]; }
+        console.log(prevStats);
+        console.log(currentStats);
+        console.log(nextStats);
+
+
+        const chartData = {
+          labels: ['Current Evolution'],
+          datasets: [
+            {
+              label: 'HP',
+              data: [currentStats[0]],
+              borderColor: 'rgba(255, 99, 132, 1)',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            },
+            {
+              label: 'Attack',
+              data: [currentStats[1]],
+              borderColor: 'rgba(54, 162, 235, 1)',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            },
+            {
+              label: 'Defense',
+              data: [currentStats[2]],
+              borderColor: 'rgba(255, 206, 86, 1)',
+              backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            },
+            {
+              label: 'Speed',
+              data: [currentStats[3]],
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            },
+          ],
+        };
+
+        if (prevStats) {
+          chartData.labels.unshift('Previous Evolution');
+          for (let i = 0; i < chartData.datasets.length; i++) {
+            chartData.datasets[i].data.unshift(prevStats[i]);
+          }
+        }
+
+        if (nextStats) {
+          chartData.labels.push('Next Evolution');
+          for (let i = 0; i < chartData.datasets.length; i++) {
+            chartData.datasets[i].data.push(nextStats[i]);
+          }
+        }
+
+
+        console.log(chartData);
+        if (prevStats || nextStats) {
+
+          if (evolveChart) {
+            console.log("Destroying chart");
+            evolveChart.destroy();
+
+
+          }
 
 
 
+          const ctxEvolve = evolveChartElement.getContext('2d');
+
+          evolveChart = new Chart(ctxEvolve, {
+            type: 'line',
+            data: chartData,
+            options: {
+
+              responsive: true, // Enable responsiveness to fit within the container
+              plugins: {
+                legend: {
+                  display: true, // Adjust legend display as needed
+                  position: 'top', // Position the legend at the top or other desired position
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  maxTicksLimit: 5, // Adjust the number of ticks on the y-axis as needed
+                },
+              },
+            },
+          });
+        }
+        else {
+          const ctxEvolve = evolveChartElement.getContext('2d');
+          ctxEvolve.clearRect(0, 0, evolveChartElement.width, evolveChartElement.height);
+        }
         console.log("Code gets to here");
 
       }
