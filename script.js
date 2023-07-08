@@ -1,4 +1,5 @@
 var acc = document.getElementsByClassName("accordion");
+
 var i;
 var currentlyOpen = null;
 let chartCreated = 0;
@@ -93,9 +94,13 @@ fetch('poke/pokedex.json')
       const displayElement = document.querySelector('#current');
       const prevElement = document.querySelector('#prev');
       const nextElement = document.querySelector('#next');
-      displayElement.style.backgroundColor = getColorForType(pokemon.type[0]);
-      prevElement.style.backgroundColor = 'white';
-      nextElement.style.backgroundColor = 'white';
+      const container = document.querySelector('#content');
+      const bgColor = getColorForType(pokemon.type[0]);
+      displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
+      container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
+      
+      prevElement.style.backgroundColor = 'transparent';
+      nextElement.style.backgroundColor = 'transparent';
       prevElement.style.boxShadow = 'none';
       nextElement.style.boxShadow = 'none';
       prevElement.style.border = 'none';
@@ -148,8 +153,10 @@ fetch('poke/pokedex.json')
               ${next ? `<p>Next: ${nextName}</p>` : ''}
             </div>
           </div>
-          <div class="type-images">${typeImages}</div>
-          <img src="${pokemon.image.thumbnail}" alt="">
+          <div class="images">
+            <div class="type-images">${typeImages}</div>
+            <img src="${pokemon.image.thumbnail}" alt="">
+          </div>
           <canvas id="myChart"></canvas>
         `;
 
@@ -201,7 +208,7 @@ fetch('poke/pokedex.json')
         if (next) {
           console.log(nextData);
           pokemon = nextData;
-          nextElement.style.backgroundColor = getColorForType(pokemon.type[0]);
+          nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
           nextElement.style.boxShadow = "2px 2px 10px #cacaca";
           nextElement.style.border = "1px solid #ccc";
           const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
@@ -212,8 +219,10 @@ fetch('poke/pokedex.json')
             <h3>${pokemon.name.english}</h3>
             
           </div>
-          <div class="type-images">${typeImages}</div>
-          <img src="${pokemon.image.thumbnail}" alt="">
+          <div class="images">
+            <div class="type-images">${typeImages}</div>
+            <img src="${pokemon.image.thumbnail}" alt="">
+          </div>
           <canvas id="myChartNext"></canvas>
         `;
           if (myChartNext) {
@@ -264,7 +273,7 @@ fetch('poke/pokedex.json')
         if (prev) {
           console.log(prevData);
           pokemon = prevData;
-          prevElement.style.backgroundColor = getColorForType(pokemon.type[0]);
+          prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
           prevElement.style.boxShadow = "2px 2px 10px #cacaca";
           prevElement.style.border = "1px solid #ccc";
           const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
@@ -275,8 +284,10 @@ fetch('poke/pokedex.json')
             <h3>${pokemon.name.english}</h3>
             
           </div>
-          <div class="type-images">${typeImages}</div>
-          <img src="${pokemon.image.thumbnail}" alt="">
+          <div class="images">
+            <div class="type-images">${typeImages}</div>
+            <img src="${pokemon.image.thumbnail}" alt="">
+          </div>
           <canvas id="myChartPrev"></canvas>
         `;
           if (myChartPrev) {
@@ -349,43 +360,43 @@ fetch('poke/pokedex.json')
 function getColorForType(type) {
   switch (type.toLowerCase()) {
     case 'grass':
-      return 'rgba(120, 200, 80, 0.5)'; // Green
+      return '120, 200, 80'; // Green
     case 'fire':
-      return 'rgba(240, 128, 48, 0.5)'; // Orange
+      return '240, 128, 48'; // Orange
     case 'water':
-      return 'rgba(104, 144, 240, 0.5)'; // Blue
+      return '104, 144, 240'; // Blue
     case 'electric':
-      return 'rgba(248, 208, 48, 0.5)'; // Yellow
+      return '248, 208, 48'; // Yellow
     case 'bug':
-      return 'rgba(168, 184, 32, 0.5)'; // Olive
+      return '168, 184, 32'; // Olive
     case 'normal':
-      return 'rgba(168, 168, 120, 0.5)'; // Light Gray
+      return '168, 168, 120'; // Light Gray
     case 'poison':
-      return 'rgba(160, 64, 160, 0.5)'; // Purple
+      return '160, 64, 160'; // Purple
     case 'ground':
-      return 'rgba(224, 192, 104, 0.5)'; // Brown
+      return '224, 192, 104'; // Brown
     case 'fairy':
-      return 'rgba(238, 153, 172, 0.5)'; // Pink
+      return '238, 153, 172'; // Pink
     case 'fighting':
-      return 'rgba(192, 48, 40, 0.5)'; // Red
+      return '192, 48, 40'; // Red
     case 'psychic':
-      return 'rgba(248, 88, 136, 0.5)'; // Pink
+      return '248, 88, 136'; // Pink
     case 'rock':
-      return 'rgba(184, 160, 56, 0.5)'; // Gray
+      return '184, 160, 56'; // Gray
     case 'ghost':
-      return 'rgba(112, 88, 152, 0.5)'; // Purple
+      return '112, 88, 152'; // Purple
     case 'ice':
-      return 'rgba(152, 216, 216, 0.5)'; // Light Blue
+      return '152, 216, 216'; // Light Blue
     case 'dragon':
-      return 'rgba(112, 56, 248, 0.5)'; // Dark Blue
+      return '112, 56, 248'; // Dark Blue
     case 'steel':
-      return 'rgba(184, 184, 208, 0.5)'; // Silver
+      return '184, 184, 208'; // Silver
     case 'dark':
-      return 'rgba(112, 88, 72, 0.5)'; // Dark Gray
+      return '112, 88, 72'; // Dark Gray
     case 'flying':
-      return 'rgba(168, 144, 240, 0.5)'; // Light Blue
+      return '168, 144, 240'; // Light Blue
     default:
-      return 'rgba(0, 0, 0, 0.5)'; // Default color
+      return '0, 0, 0'; // Default color
   }
 }
 
