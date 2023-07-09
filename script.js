@@ -23,6 +23,7 @@ statDistButton.addEventListener('click', function (event) {
 });
 
 
+
 const startTime = performance.now();
 
 fetch('poke/pokedex.json')
@@ -93,9 +94,14 @@ fetch('poke/pokedex.json')
       }
     });
 
+    
+
     canvas.addEventListener('click', handleClick);
 
+   
+
     function handleClick(event) {
+      
       const selectedPokemonWindow = document.querySelector('.selectedPokemon');
       const points = pieChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
 
@@ -106,14 +112,30 @@ fetch('poke/pokedex.json')
         console.log(selectedType);
         const selectedPokemon = getPokemonByType(selectedType);
         const selectedBGColor = getColorForType(selectedType);
-        const selectedSprites = selectedPokemon.slice(0,39).map(pokemon => `<img src="${pokemon.image.sprite}" alt="${pokemon.name.english}" title="${pokemon.name.english}" style='width: 37px'>`);
+        const selectedSprites = selectedPokemon.slice(0, 39).map(pokemon => {
+          const imgElement = document.createElement('img');
+          imgElement.src = pokemon.image.sprite;
+          imgElement.alt = pokemon.name.english;
+          imgElement.title = pokemon.name.english;
+          imgElement.style.width = '37px';
+          imgElement.addEventListener('click', (function(pokemonName) {
+            return function() {
+              displayPokemonInfo(pokemonName);
+            };
+          })(pokemon.name.english));
+          return imgElement.outerHTML;
+        });
         selectedPokemonWindow.innerHTML = selectedSprites.join(' ');
         selectedPokemonWindow.style.backgroundColor = `rgba(${selectedBGColor},0.2)`
         selectedPokemonWindow.style.boxShadow = `0px 0px 10px rgba(${selectedBGColor},0.8)`
-        // set the background color of the window to that type of pokemon, but with opacity 0.2
+        
 
       
       }
+    }
+
+    function clickedPokemon(pokemon) {
+      displayPokemonInfo(pokemon);
     }
 
     function getPokemonByType(type) {
@@ -135,7 +157,7 @@ fetch('poke/pokedex.json')
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           let textColor = getColorForType(data[pokemonData[0] - 1].type[0]);
           console.log(textColor);
-          return `<li ><a href="#" data-id="${pokemonData[0]}" style='color:rgb(${(textColor)}); background-color: rgba(${textColor}, 0.1); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
+          return `<li><a href="#" data-id="${pokemonData[0]}" style='color:rgb(${(textColor)}); background-color: rgba(${textColor}, 0.1); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
         }).join('');
 
         if (matchedPokemon.length > 8) {
@@ -163,6 +185,9 @@ fetch('poke/pokedex.json')
     }
 
     function displayPokemonInfo(pokemon) {
+      console.log(`displaying pokemon: ${pokemon.name.english}`);
+      statDistContainer.style.display = 'none';
+      searchContainer.style.display = 'flex';
       let prev = false;
       let next = false;
       let prevData;
@@ -541,6 +566,9 @@ fetch('poke/pokedex.json')
         `;
       }
     }
+
+    
+
   })
   .catch(error => {
     console.error('Error:', error);
