@@ -37,124 +37,124 @@ fetch('poke/pokedex.json')
 
     document.getElementById('search').addEventListener('keyup', searchPokemon);
 
-    function countOccurrences() {
+    // function countOccurrences() {
 
-      const typeCount = {};
+    //   const typeCount = {};
 
-      for (const entry of data) {
-        for (const type of entry.type) {
-          typeCount[type] = (typeCount[type] || 0) + 1;
-        }
-      }
+    //   for (const entry of data) {
+    //     for (const type of entry.type) {
+    //       typeCount[type] = (typeCount[type] || 0) + 1;
+    //     }
+    //   }
 
 
-      return typeCount;
+    //   return typeCount;
 
-    }
+    // }
 
-    let typeCount = countOccurrences();
-    const canvas = document.getElementById('statGraph');
-    const typeNames = Object.keys(typeCount);
-    const typeCounts = Object.values(typeCount);
+    // let typeCount = countOccurrences();
+    // const canvas = document.getElementById('statGraph');
+    // const typeNames = Object.keys(typeCount);
+    // const typeCounts = Object.values(typeCount);
 
-    const typeColors = {
-      'Grass': getColorForType('grass'),
-      'Fire': getColorForType('fire'),
-      'Water': getColorForType('water'),
-      'Electric': getColorForType('electric'),
-      'Bug': getColorForType('bug'),
-      'Normal': getColorForType('normal'),
-      'Poison': getColorForType('poison'),
-      'Ground': getColorForType('ground'),
-      'Fairy': getColorForType('fairy'),
-      'Fighting': getColorForType('fighting'),
-      'Psychic': getColorForType('psychic'),
-      'Rock': getColorForType('rock'),
-      'Ghost': getColorForType('ghost'),
-      'Ice': getColorForType('ice'),
-      'Dragon': getColorForType('dragon'),
-      'Steel': getColorForType('steel'),
-      'Dark': getColorForType('dark'),
-      'Flying': getColorForType('flying')
-    };
-    console.log(typeColors);
+    // const typeColors = {
+    //   'Grass': getColorForType('grass'),
+    //   'Fire': getColorForType('fire'),
+    //   'Water': getColorForType('water'),
+    //   'Electric': getColorForType('electric'),
+    //   'Bug': getColorForType('bug'),
+    //   'Normal': getColorForType('normal'),
+    //   'Poison': getColorForType('poison'),
+    //   'Ground': getColorForType('ground'),
+    //   'Fairy': getColorForType('fairy'),
+    //   'Fighting': getColorForType('fighting'),
+    //   'Psychic': getColorForType('psychic'),
+    //   'Rock': getColorForType('rock'),
+    //   'Ghost': getColorForType('ghost'),
+    //   'Ice': getColorForType('ice'),
+    //   'Dragon': getColorForType('dragon'),
+    //   'Steel': getColorForType('steel'),
+    //   'Dark': getColorForType('dark'),
+    //   'Flying': getColorForType('flying')
+    // };
+    // console.log(typeColors);
 
-    const pieChart = new Chart(canvas, {
-      type: 'pie',
-      data: {
-        labels: typeNames,
-        datasets: [{
-          data: typeCounts,
-          backgroundColor: typeNames.map(type => `rgba(${typeColors[type]}, 0.6)`)
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {
-          display: true,
-          text: 'Pokemon Type Distribution'
-        },
-        legend: {
-          display: true,
-          position: 'bottom'
-        },
-        plugins: {
-          labels: {
-            display: false // Disable the labels
-          },
-          legend: false
-        }
-        // Add more customization options as needed
-      }
-    });
-    
-    
+    // const pieChart = new Chart(canvas, {
+    //   type: 'pie',
+    //   data: {
+    //     labels: typeNames,
+    //     datasets: [{
+    //       data: typeCounts,
+    //       backgroundColor: typeNames.map(type => `rgba(${typeColors[type]}, 0.6)`)
+    //     }]
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     title: {
+    //       display: true,
+    //       text: 'Pokemon Type Distribution'
+    //     },
+    //     legend: {
+    //       display: true,
+    //       position: 'bottom'
+    //     },
+    //     plugins: {
+    //       labels: {
+    //         display: false // Disable the labels
+    //       },
+    //       legend: false
+    //     }
+    //     // Add more customization options as needed
+    //   }
+    // });
 
-    
 
-    canvas.addEventListener('click', handleClick);
 
-   
 
-    function handleClick(event) {
 
-      const selectedPokemonWindow = document.querySelector('.selectedPokemon');
-      const points = pieChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+    // canvas.addEventListener('click', handleClick);
 
-      if (points.length) {
-        const firstPoint = points[0];
-        const selectedIndex = firstPoint.index;
-        const selectedType = typeNames[selectedIndex];
-        console.log(selectedType);
-        const selectedPokemon = getPokemonByType(selectedType);
-        const selectedBGColor = getColorForType(selectedType);
-        const selectedSprites = selectedPokemon.slice(0, 39).map(pokemon => {
-          const imgElement = document.createElement('img');
-          imgElement.src = pokemon.image.sprite;
-          imgElement.alt = pokemon.name.english;
-          imgElement.title = pokemon.name.english;
-          imgElement.style.width = '37px';
-          imgElement.addEventListener('click', (function(pokemonName) {
-            return function() {
-              // copy the pokemonName to the clipboard
-              copyToClipboard(this.getAttribute('alt'));
-            };
-          })(pokemon.name.english));
-          return imgElement.outerHTML;
-        });
-        selectedPokemonWindow.innerHTML = selectedSprites.join(' ');
-        selectedPokemonWindow.style.backgroundColor = `rgba(${selectedBGColor},0.2)`
-        selectedPokemonWindow.style.boxShadow = `0px 0px 10px rgba(${selectedBGColor},0.8)`
-        
 
-      
-      }
-    }
 
-    
+    // function handleClick(event) {
 
-   
+    //   const selectedPokemonWindow = document.querySelector('.selectedPokemon');
+    //   const points = pieChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+
+    //   if (points.length) {
+    //     const firstPoint = points[0];
+    //     const selectedIndex = firstPoint.index;
+    //     const selectedType = typeNames[selectedIndex];
+    //     console.log(selectedType);
+    //     const selectedPokemon = getPokemonByType(selectedType);
+    //     const selectedBGColor = getColorForType(selectedType);
+    //     const selectedSprites = selectedPokemon.slice(0, 39).map(pokemon => {
+    //       const imgElement = document.createElement('img');
+    //       imgElement.src = pokemon.image.sprite;
+    //       imgElement.alt = pokemon.name.english;
+    //       imgElement.title = pokemon.name.english;
+    //       imgElement.style.width = '37px';
+    //       imgElement.addEventListener('click', (function(pokemonName) {
+    //         return function() {
+    //           // copy the pokemonName to the clipboard
+    //           copyToClipboard(this.getAttribute('alt'));
+    //         };
+    //       })(pokemon.name.english));
+    //       return imgElement.outerHTML;
+    //     });
+    //     selectedPokemonWindow.innerHTML = selectedSprites.join(' ');
+    //     selectedPokemonWindow.style.backgroundColor = `rgba(${selectedBGColor},0.2)`
+    //     selectedPokemonWindow.style.boxShadow = `0px 0px 10px rgba(${selectedBGColor},0.8)`
+
+
+
+    //   }
+    // }
+
+
+
+
 
     function getPokemonByType(type) {
       return data.filter(item => item.type.includes(type));
@@ -585,12 +585,144 @@ fetch('poke/pokedex.json')
       }
     }
 
-    
+
 
   })
   .catch(error => {
     console.error('Error:', error);
   });
+
+fetch('poke/output.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+
+    for (let i = 1; i < 8; i++) {
+      function countOccurrences(data) {
+        const typeCount = {};
+
+        for (const entry of data) {
+          if (parseInt(entry.generation) <= i) {
+
+            const type1 = entry.type1;
+            const type2 = entry.type2;
+
+            if (type1) {
+              typeCount[type1] = (typeCount[type1] || 0) + 1;
+
+            }
+
+            if (type2) {
+              typeCount[type2] = (typeCount[type2] || 0) + 1;
+
+
+            }
+          }
+        }
+
+        return typeCount;
+      }
+
+
+
+      let typeCount = countOccurrences(data);
+      console.log(typeCount);
+
+
+      const canvas = document.getElementById(`statGraph${i}`);
+
+      const typeNames = Object.keys(typeCount);
+      const typeCounts = Object.values(typeCount);
+
+      const typeColors = {
+        'grass': getColorForType('grass'),
+        'fire': getColorForType('fire'),
+        'water': getColorForType('water'),
+        'electric': getColorForType('electric'),
+        'bug': getColorForType('bug'),
+        'normal': getColorForType('normal'),
+        'poison': getColorForType('poison'),
+        'ground': getColorForType('ground'),
+        'fairy': getColorForType('fairy'),
+        'fighting': getColorForType('fighting'),
+        'psychic': getColorForType('psychic'),
+        'rock': getColorForType('rock'),
+        'ghost': getColorForType('ghost'),
+        'ice': getColorForType('ice'),
+        'dragon': getColorForType('dragon'),
+        'steel': getColorForType('steel'),
+        'dark': getColorForType('dark'),
+        'flying': getColorForType('flying')
+      };
+      console.log(typeColors);
+
+      const pieChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+          labels: typeNames,
+          datasets: [{
+            data: typeCounts,
+            backgroundColor: typeNames.map(type => `rgba(${typeColors[type]}, 0.6)`)
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: 'Pokemon Type Distribution'
+          },
+          legend: {
+            display: true,
+            position: 'bottom'
+          },
+          plugins: {
+            labels: {
+              display: false // Disable the labels
+            },
+            legend: false
+          }
+          // Add more customization options as needed
+        }
+      });
+    }
+
+    const canvas = document.querySelector('.lineGenGraph');
+    const generationNames = ['Generation 1', 'Generation 2', 'Generation 3', 'Generation 4', 'Generation 5', 'Generation 6', 'Generation 7'];
+    const generationCounts = [151, 251, 386, 439, 649, 721, 801];
+
+    const lineChart = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: generationNames,
+        datasets: [{
+          label: 'Number of Pokemon',
+          data: generationCounts,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: 'origin'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Pokemon Count by Generation'
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+        // Add more customization options as needed
+      }
+    });
+
+
+  })
 
 function getColorForType(type) {
   console.log(type);
