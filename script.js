@@ -86,13 +86,30 @@ fetch('poke/pokedex.json')
         datasets: [{
           data: typeCounts,
           backgroundColor: typeNames.map(type => `rgba(${typeColors[type]}, 0.6)`)
-
         }]
       },
       options: {
-        // Customize chart options as needed
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Pokemon Type Distribution'
+        },
+        legend: {
+          display: true,
+          position: 'bottom'
+        },
+        plugins: {
+          labels: {
+            display: false // Disable the labels
+          },
+          legend: false
+        }
+        // Add more customization options as needed
       }
     });
+    
+    
 
     
 
@@ -101,7 +118,7 @@ fetch('poke/pokedex.json')
    
 
     function handleClick(event) {
-      
+
       const selectedPokemonWindow = document.querySelector('.selectedPokemon');
       const points = pieChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
 
@@ -120,7 +137,8 @@ fetch('poke/pokedex.json')
           imgElement.style.width = '37px';
           imgElement.addEventListener('click', (function(pokemonName) {
             return function() {
-              displayPokemonInfo(pokemonName);
+              // copy the pokemonName to the clipboard
+              copyToClipboard(this.getAttribute('alt'));
             };
           })(pokemon.name.english));
           return imgElement.outerHTML;
@@ -134,9 +152,9 @@ fetch('poke/pokedex.json')
       }
     }
 
-    function clickedPokemon(pokemon) {
-      displayPokemonInfo(pokemon);
-    }
+    
+
+   
 
     function getPokemonByType(type) {
       return data.filter(item => item.type.includes(type));
