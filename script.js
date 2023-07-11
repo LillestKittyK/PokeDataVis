@@ -81,7 +81,7 @@ buttons.forEach((button, index) => {
 
       const images = await getPokeImages(number);
       // count the number of times the word 'images' appears in the variable images
-      
+
 
       num.textContent = `${genCount}`;
       selectedPokemonWindow.innerHTML = `${images}`;
@@ -110,8 +110,20 @@ async function getPokeImages(generation) {
     const imgList = pokeList.slice(0, 50).map((pokeName) => {
       const pokeData = data2.find((pokemon) => pokemon.name.english === pokeName);
       const imgSrc = pokeData ? pokeData.image.sprite : '';
-      return `<img src="${imgSrc}" alt="${pokeName}" title="${pokeName}" />`;
+
+      let imgBg = '';
+      let type = '';
+      if (pokeData && pokeData.type) {
+        type = pokeData.type[0]; // Assuming the first type is used
+        imgBg = `rgba(${getColorForType(type)}, 0.8)`;
+      }
+
+      const entryId = pokeData ? pokeData.id : '';
+
+      return `<img src="${imgSrc}" alt="${pokeName}" title="${pokeName}, ${type}" style="background-color: ${imgBg};" data-entry-id="${entryId}" />`;
     });
+
+
 
     const pokeImagesHTML = imgList.join('\n');
     console.log(pokeImagesHTML);
