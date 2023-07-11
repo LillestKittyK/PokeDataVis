@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="particles.css">
 </head>
 
 <body>
@@ -26,13 +27,42 @@
         <div class="statDist">
             <button class="accordion" id="statBtn">Stat Dist</button>
         </div>
-        
+
     </div>
-    <div class="particleDiv">
-            
+    <div id="particle-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
     <div id="content">
-        
+
         <div class="poke-row">
             <div class="display-pokemon" id="prev">
             </div>
@@ -50,7 +80,7 @@
                 <canvas id="evolution"></canvas>
             </div>
             <div class="icon">
-                
+
             </div>
         </div>
         <!-- <canvas id="myChart"></canvas> -->
@@ -81,7 +111,7 @@
                 <p class="count4">Total Pokemon: 493</p>
                 <canvas class="statGraph" id="statGraph4"></canvas>
                 <button class="sel4">Select</button>
-                </div>
+            </div>
             <div class="graphBox" id="gen5">
                 <h3>Generation 5</h3>
                 <p class="count5">Total Pokemon: 649</p>
@@ -105,16 +135,17 @@
                 <canvas class="lineGenGraph"></canvas>
             </div>
             <div class="selectedPokemon">
-                <h3 id="genTitle">Generation <span id="gen"></span> introduced <span id="num"></span> Pokemon, including:</h3>
+                <h3 id="genTitle">Generation <span id="gen"></span> introduced <span id="num"></span> Pokemon,
+                    including:</h3>
                 <div class="genPokemon">
 
                 </div>
             </div>
         </div>
-        
+
     </div>
     <script src="script.js"></script>
-    
+
 </body>
 
 </html>

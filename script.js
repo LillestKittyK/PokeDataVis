@@ -215,12 +215,26 @@ fetch('poke/pokedex.json')
       let myChart = null;
       let myChartNext = null;
       let myChartPrev = null;
+      const currentContainer = document.getElementById('current');
+      const particleContainer = document.getElementById('particle-container');
 
       // figure out if the pokemon is legendary
 
       let legendary = pokemon.species.includes("Legendary") || pokemon.description.includes("legendary");
       console.log(pokemon.species);
       console.log(`${pokemon.name} is Legendary? ${legendary}`);
+      if(legendary) {
+        if (!currentContainer.classList.contains('legendary')) {
+          currentContainer.classList.add('legendary');
+          particleContainer.style.display = 'block';
+        }
+      }
+      else {
+        if(currentContainer.classList.contains('legendary')) {
+          currentContainer.classList.remove('legendary');
+          particleContainer.style.display = 'none';
+        }
+      }
 
 
       let prevStats;
@@ -251,8 +265,11 @@ fetch('poke/pokedex.json')
       nextElement.innerHTML = '';
 
       let canvasElement = document.getElementById('myChart'); // Get existing canvas element
+      
       if (pokemon.evolution) {
+        lineContainer.style.display = 'block';
         if (pokemon.evolution.next) {
+          lineContainer.style.display = 'block';
           next = true;
           console.log(`Next: ${pokemon.evolution.next[0][0]}`);
           // console log that entry of the json with that id
@@ -268,6 +285,7 @@ fetch('poke/pokedex.json')
 
         }
         if (pokemon.evolution.prev) {
+          lineContainer.style.display = 'block';
           prev = true;
           console.log(`Prev: ${pokemon.evolution.prev[0]}`);
           let id = pokemon.evolution.prev[0] - 1;
@@ -277,6 +295,10 @@ fetch('poke/pokedex.json')
 
         }
 
+
+      }
+      if(!prev && !next) {
+        lineContainer.style.display = 'none';
 
       }
 
@@ -289,6 +311,7 @@ fetch('poke/pokedex.json')
       displayElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
+            ${legendary ? `<p id="legendaryTitle">Legendary</p>`: ''}
             <div class="evos">
               ${prev ? `<p>Prev: ${prevName}</p>` : ''}
               ${next ? `<p>Next: ${nextName}</p>` : ''}
