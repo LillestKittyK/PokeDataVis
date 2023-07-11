@@ -7,12 +7,12 @@
     <title>Pokemon Data Visualisation</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 
 <body>
     <div class="sidebar">
-        <div class="searchBar">
+        <div class="searchBar" id="legendary">
             <button class="accordion" id="searchBtn">Search</button>
             <div class="panel">
                 <div class="search-container">
@@ -28,12 +28,16 @@
         </div>
         
     </div>
+    <div class="particleDiv">
+            
+    </div>
     <div id="content">
+        
         <div class="poke-row">
             <div class="display-pokemon" id="prev">
             </div>
-            <div class="display-pokemon" id="current">
-                <div class="display-header">
+            <div class="display-pokemon big" id="current">
+                <div class="display-header" style="height: 110px">
                     <h3>Display Pokemon</h3>
                 </div>
                 <p>Search to the left to display a Pokemon!</p>

@@ -216,6 +216,13 @@ fetch('poke/pokedex.json')
       let myChartNext = null;
       let myChartPrev = null;
 
+      // figure out if the pokemon is legendary
+
+      let legendary = pokemon.species.includes("Legendary") || pokemon.description.includes("legendary");
+      console.log(pokemon.species);
+      console.log(`${pokemon.name} is Legendary? ${legendary}`);
+
+
       let prevStats;
       let nextStats;
       let entry;
@@ -272,14 +279,14 @@ fetch('poke/pokedex.json')
 
 
       }
-      if (pokemon.base) {
-        console.log(`'chart created is ${chartCreated}'`)
-        chartCreated = 1;
 
-        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
-        console.log(`prev: ${prevName}`);
-        console.log(`next: ${nextName}`);
-        displayElement.innerHTML = `
+      // console.log(`'chart created is ${chartCreated}'`)
+      chartCreated = 1;
+
+      const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+      console.log(`prev: ${prevName}`);
+      console.log(`next: ${nextName}`);
+      displayElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
             <div class="evos">
@@ -289,11 +296,12 @@ fetch('poke/pokedex.json')
           </div>
           <div class="images">
             <div class="type-images">${typeImages}</div>
-            <img src="${pokemon.image.thumbnail}" alt="">
+            <img src="${pokemon.image.thumbnail}" alt="" id="big-image">
           </div>
           <canvas id="myChart"></canvas>
         `;
 
+      if (pokemon.base) {
         if (myChart) {
           myChart.destroy();
         }
@@ -338,18 +346,19 @@ fetch('poke/pokedex.json')
             }
           }
         });
+      }
 
-        if (next) {
-          console.log(nextData);
-          pokemon = nextData;
-          bgColor = getColorForType(pokemon.type[0]);
-          nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
-          nextElement.style.boxShadow = "2px 2px 10px #cacaca";
-          nextElement.style.border = "1px solid #ccc";
-          const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
-          console.log(`prev: ${prevName}`);
-          console.log(`next: ${nextName}`);
-          nextElement.innerHTML = `
+      if (next) {
+        console.log(nextData);
+        pokemon = nextData;
+        bgColor = getColorForType(pokemon.type[0]);
+        nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
+        nextElement.style.boxShadow = "2px 2px 10px #cacaca";
+        nextElement.style.border = "1px solid #ccc";
+        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+        console.log(`prev: ${prevName}`);
+        console.log(`next: ${nextName}`);
+        nextElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
             
@@ -360,62 +369,64 @@ fetch('poke/pokedex.json')
           </div>
           <canvas id="myChartNext"></canvas>
         `;
-          if (myChartNext) {
-            myChartNext.destroy();
-          }
 
-          const ctx = document.getElementById('myChartNext').getContext('2d');
-          myChartNext = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['HP', 'Attack', 'Defense', 'Speed'],
-              datasets: [{
-                label: pokemon.name.english,
-                data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
-                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-                borderWidth: 1
-              }]
+
+        if(pokemon.base){if (myChartNext) {
+          myChartNext.destroy();
+        }
+
+        const ctx = document.getElementById('myChartNext').getContext('2d');
+        myChartNext = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['HP', 'Attack', 'Defense', 'Speed'],
+            datasets: [{
+              label: pokemon.name.english,
+              data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
             },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              },
-              plugins: {
-                afterDraw: function (chart) {
-                  var ctx = chart.ctx;
-                  chart.data.datasets.forEach(function (dataset, i) {
-                    var meta = chart.getDatasetMeta(i);
-                    if (!meta.hidden) {
-                      meta.data.forEach(function (element, index) {
-                        // Draw the value inside the bar
-                        var data = dataset.data[index];
-                        ctx.fillStyle = 'black';
-                        ctx.font = '12px Open Sans';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText(data, element.x, element.y - 10);
-                      });
-                    }
-                  });
-                }
+            plugins: {
+              afterDraw: function (chart) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                  var meta = chart.getDatasetMeta(i);
+                  if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                      // Draw the value inside the bar
+                      var data = dataset.data[index];
+                      ctx.fillStyle = 'black';
+                      ctx.font = '12px Open Sans';
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
+                      ctx.fillText(data, element.x, element.y - 10);
+                    });
+                  }
+                });
               }
             }
-          });
-        }
-        if (prev) {
-          console.log(prevData);
-          pokemon = prevData;
-          bgColor = getColorForType(pokemon.type[0]);
-          prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
-          prevElement.style.boxShadow = "2px 2px 10px #cacaca";
-          prevElement.style.border = "1px solid #ccc";
-          const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
-          console.log(`prev: ${prevName}`);
-          console.log(`next: ${nextName}`);
-          prevElement.innerHTML = `
+          }
+        });}
+      }
+      if (prev) {
+        console.log(prevData);
+        pokemon = prevData;
+        bgColor = getColorForType(pokemon.type[0]);
+        prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
+        prevElement.style.boxShadow = "2px 2px 10px #cacaca";
+        prevElement.style.border = "1px solid #ccc";
+        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+        console.log(`prev: ${prevName}`);
+        console.log(`next: ${nextName}`);
+        prevElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
             
@@ -426,52 +437,55 @@ fetch('poke/pokedex.json')
           </div>
           <canvas id="myChartPrev"></canvas>
         `;
-          if (myChartPrev) {
-            myChartPrev.destroy();
-          }
 
-          const ctx = document.getElementById('myChartPrev').getContext('2d');
-          myChartPrev = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['HP', 'Attack', 'Defense', 'Speed'],
-              datasets: [{
-                label: pokemon.name.english,
-                data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
-                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              },
-              plugins: {
-                afterDraw: function (chart) {
-                  var ctx = chart.ctx;
-                  chart.data.datasets.forEach(function (dataset, i) {
-                    var meta = chart.getDatasetMeta(i);
-                    if (!meta.hidden) {
-                      meta.data.forEach(function (element, index) {
-                        // Draw the value inside the bar
-                        var data = dataset.data[index];
-                        ctx.fillStyle = 'black';
-                        ctx.font = '12px Open Sans';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText(data, element.x, element.y - 10);
-                      });
-                    }
-                  });
-                }
-              }
-            }
-          });
+
+        if(pokemon.base){if (myChartPrev) {
+          myChartPrev.destroy();
         }
 
+        const ctx = document.getElementById('myChartPrev').getContext('2d');
+        myChartPrev = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['HP', 'Attack', 'Defense', 'Speed'],
+            datasets: [{
+              label: pokemon.name.english,
+              data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+            plugins: {
+              afterDraw: function (chart) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                  var meta = chart.getDatasetMeta(i);
+                  if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                      // Draw the value inside the bar
+                      var data = dataset.data[index];
+                      ctx.fillStyle = 'black';
+                      ctx.font = '12px Open Sans';
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
+                      ctx.fillText(data, element.x, element.y - 10);
+                    });
+                  }
+                });
+              }
+            }
+          }
+        });}
+      }
+
+      if(pokemon.base) {
         console.log(prevData);
         if (prevData) { prevStats = [prevData.base.HP, prevData.base.Attack, prevData.base.Defense, prevData.base.Speed]; }
         let currentStats = [currentData.base.HP, currentData.base.Attack, currentData.base.Defense, currentData.base.Speed];
@@ -566,21 +580,10 @@ fetch('poke/pokedex.json')
           ctxEvolve.clearRect(0, 0, evolveChartElement.width, evolveChartElement.height);
         }
         console.log("Code gets to here");
+      }
 
-      }
-      else {
-        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
-        displayElement.innerHTML = `
-          <div class="display-header">
-            <h3>${pokemon.name.english}</h3>
-          </div>
-          <div class="images">
-            <div class="type-images">${typeImages}</div>
-            <img src="${pokemon.image.thumbnail}" alt="">
-            
-          </div>
-        `;
-      }
+
+
     }
 
 
