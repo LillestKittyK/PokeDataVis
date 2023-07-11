@@ -329,6 +329,10 @@ li a {
  
 }
 
+.graphBox.selected {
+  background-color: white;
+}
+
 .lineGen {
   background-color: #e2e2e2;
   display: flex;
@@ -352,7 +356,21 @@ li a {
 
 }
 
+.genPokemon {
+  gap: 0;
+  position: relative;
+  top: -15px;
+  padding: 5px;
+}
 
+.genPokemon > img {
+  padding: 0;
+  border-radius: 40%;
+}
+
+.genPokemon > img:hover {
+  background-color: rgba(255,255,255,0.8);
+}
 
 .selectedPokemon {
   width: 450px;
@@ -366,9 +384,11 @@ li a {
   flex-wrap: wrap;
 }
 
-.selectedPokemon > img:hover {
-  background-color: rgba(255,255,255,0.8);
+.selectedPokemon > h3 {
+  display: none;
 }
+
+
 
 .statDistWindow > h3 {
   margin: 10px;
