@@ -229,7 +229,7 @@ li a {
 
 
 .search input {
-  width: 0;
+  width: 100px;
   
   outline: none;
   border: none;
@@ -238,9 +238,6 @@ li a {
   background: transparent;
 }
 
-.search:hover input {
-  width: 100px;
-}
 
 
 
