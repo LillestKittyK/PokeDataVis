@@ -1,3 +1,5 @@
+
+
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +9,7 @@ body {
   overflow: hidden;
   /* a nice modern font*/
   /* use roboto font */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 #particle-container {
@@ -16,13 +18,40 @@ body {
   display: none;
 }
 
+.credits {
+  color: white;
+  text-align: center;
+  
+}
+
+.credits > span {
+  color: black;
+  font-size: 0.7rem;
+}
+
+#madeby {
+  font-size: 1.3rem;
+  margin-bottom: 0;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 10px black;
+}
+
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   width: 12%;
   min-width: 12%;
   z-index: 2;
-  background-color: #dadada;
+  background-color: transparent;
   padding: 20px;
   height: 100vh;
+  background: url('images/icons.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: top 20px !important;
   overflow-y: auto; /* Enable vertical scrolling within the sidebar */
 }
 
@@ -46,8 +75,15 @@ body {
   
 }
 
+.endContainer {
+  
+  position: relative;
+  bottom: 25px;
+}
+
 #current {
   margin-bottom: -15%;
+  height: 150%;
 }
 
 .poke-row {
@@ -65,19 +101,41 @@ body {
   align-items: flex-start;
 }
 
-
+.pokeBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100vh;
+  border-right: 1px solid gray;
+  z-index: 2;
+  background: linear-gradient(to top, gray, white);
+  margin: 0;
+  
+}
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: gray;
+  box-shadow: 0px 0px 10px gray;
+  color: white;
+  font-weight: bold;
+  font-family: 'Poppins';
+  font-size: 1.2rem;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   text-align: left;
-  border: none;
+  border: 4px solid white;
   outline: none;
   transition: 0.4s;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.accordion.active {
+  background-color: white;
+  color: gray;
 }
 
 .icon {
@@ -129,23 +187,37 @@ li a {
   background-color: #ccc;
 }
 
+#numresults {
+  margin: 0;
+}
+
+#toomany {
+  margin-bottom: 0px;
+}
+
 /* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: transparent;
   
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   /* add more space at the bottom */
   padding-bottom: 0px;
-  border-bottom: 1px solid black;
-  height: 80vh;
+  border-bottom: 1px solid gray;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
 }
 
 #search {
   margin-top: 10px;
   padding: 5px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  width: 90%;
 }
 
 .types {
@@ -159,14 +231,16 @@ li a {
 
 .rounded-box {
   
-  background-color: #ebebeb;
-  padding: 10px;
+  background-color: rgba(255,255,255,0.6);
+  border: 1px solid gray;
+  box-shadow: 0px 0px 10px gray;
+  padding: 8px;
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 70%;
+  min-height: 65%;
   /* slight grey border */
-  border: 1px solid #ccc;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -185,11 +259,15 @@ li a {
   gap: 20px;
 }
 
+.display-header {
+  min-height: 60px;
+  max-height: 90px;
+}
 
-
-.display-header > h3 {
+.display-header h3 {
   margin-top: 5px;
   margin-bottom: 0;
+  font-size: 1.8rem !important;
   
 }
 
@@ -219,6 +297,7 @@ li a {
   justify-content: space-between;
   /* what is the one for text size */
   text-align: center;
+  
   /* change font size */
   font-size: 1rem;
   margin: 10px;
@@ -284,11 +363,20 @@ li a {
   align-items: center;
 }
 
+.display-pokemon.big {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+}
+
 .display-pokemon.big h3 {
   font-size: 2em;
 }
 
-
+#next, #prev {
+  display: none;
+}
 
 #myChart, #myChartNext, #myChartPrev {
   background-color: rgba(255,255,255,0.6);
@@ -307,6 +395,9 @@ li a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  
+  
 }
 
 .images #big-image {
@@ -326,6 +417,7 @@ li a {
   height: 80%;
   
 }
+
 
 .statDistWindow {
   display: none;
@@ -387,10 +479,15 @@ li a {
   gap: 0;
 }
 
-.graphBox > h3 {
+.graphBox h3 {
   margin: 0; 
-  padding: 0;
-  top: -20px;
+  background-color: white;
+  
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+  box-shadow: 0px 0px 5px gray;
+  top: -25px;
 
 }
 
@@ -415,19 +512,35 @@ li a {
   width: 450px;
   height: 270px;
   display: flex;
+  font-size: 0.9rem !important;
   align-items: center;
   justify-content: center;
   background-color: #e2e2e2;
   box-shadow: 0px 0px 10px rgb(129, 129, 129);
   border-radius: 10px;
   flex-wrap: wrap;
+  position: relative;
+  
+}
+
+.lineGenGraph {
+  position: relative;
+  top: -10px;
 }
 
 .selectedPokemon > h3 {
   display: none;
+  position: relative;
+  margin-top: 5px;
+  text-shadow: 0px 0px 1px white;
+  
 }
 
-
+.statDist {
+  margin-bottom: 10px;
+  position: relative;
+  width: 100%;
+}
 
 .statDistWindow > h3 {
   margin: 10px;
@@ -488,21 +601,24 @@ li a {
 
 .legendary {
   
-  border: 4px solid yellow;
-  box-shadow: 0px 0px 20px lightyellow;
+  border: 4px solid yellow !important;
+  box-shadow: 0px 0px 20px lightyellow !important;
+  margin-bottom: 100px;
+  
 }
 
 #legendaryTitle {
   font-size: 2rem;
   padding-top: 0px;
   background-color: rgb(255, 253, 105);
-  width: 70%;
+  
   border-radius: 10px;
   border: 1px solid yellow;
   box-shadow: 0px 0px 10px yellow;
-  padding: 5px;
+  
   text-shadow: 0px 0px 10px rgb(46, 46, 0);
   color: yellow;
+  padding: 5px 10px;
 
 }
 

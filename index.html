@@ -9,12 +9,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="particles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div class="pokeBg"></div>
     <div class="sidebar">
         <div class="searchBar" id="legendary">
-            <button class="accordion" id="searchBtn">Search</button>
+            <button class="accordion active" id="searchBtn">Search</button>
             <div class="panel">
                 <div class="search-container">
                     <input type="text" placeholder="Search" id="search">
@@ -24,10 +28,15 @@
                 </div>
             </div>
         </div>
-        <div class="statDist">
-            <button class="accordion" id="statBtn">Stat Dist</button>
+        <div class="endContainer">
+            <div class="statDist">
+                <button class="accordion" id="statBtn">Stat Dist</button>
+            </div>
+            <div class="credits">
+                <span id="madeby">Made by</span><br>
+                <span>lillestkittykat | miguelzinho | seenu</span>
+            </div>
         </div>
-
     </div>
     <div id="particle-container">
         <div class="particle"></div>
@@ -67,7 +76,7 @@
             <div class="display-pokemon" id="prev">
             </div>
             <div class="display-pokemon big" id="current">
-                <div class="display-header" style="height: 110px">
+                <div class="display-header">
                     <h3>Display Pokemon</h3>
                 </div>
                 <p>Search to the left to display a Pokemon!</p>
@@ -131,7 +140,7 @@
                 <button class="sel7">Select</button>
             </div>
             <div class="lineGen">
-                <h3>Line graph here</h3>
+                <h3>Generational Increases</h3>
                 <canvas class="lineGenGraph"></canvas>
             </div>
             <div class="selectedPokemon">

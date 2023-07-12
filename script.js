@@ -22,6 +22,20 @@ statDistButton.addEventListener('click', function (event) {
   statDistContainer.style.display = 'flex';
 });
 
+const accordionButtons = document.querySelectorAll('.accordion');
+
+accordionButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    accordionButtons.forEach(btn => {
+      if (btn === button) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  });
+});
+
 const buttons = document.querySelectorAll('button[class*="sel"]');
 const divs = document.querySelectorAll('.graphBox');
 const selectedPokemonWindow = document.querySelector('.genPokemon');
@@ -169,7 +183,7 @@ fetch('poke/pokedex.json')
 
       if (matchedPokemon.length > 0) {
 
-        let listItems = matchedPokemon.slice(0, 10).map(item => {
+        let listItems = matchedPokemon.slice(0, 8).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           let textColor = getColorForType(data[pokemonData[0] - 1].type[0]);
           console.log(textColor);
@@ -177,13 +191,13 @@ fetch('poke/pokedex.json')
         }).join('');
 
         if (matchedPokemon.length > 8) {
-          listItems += '<li>Too many results...</li>';
+          listItems += '<li id="toomany">Too many results...</li>';
         }
 
 
 
         const numResults = matchedPokemon.length;
-        roundedBox.innerHTML = `<p>${numResults} result${numResults > 1 ? 's' : ''} found</p><ul>${listItems}</ul>`;
+        roundedBox.innerHTML = `<p id="numresults">${numResults} result${numResults > 1 ? 's' : ''} found</p><ul>${listItems}</ul>`;
 
         const links = roundedBox.querySelectorAll('a');
         links.forEach(link => {
@@ -223,14 +237,14 @@ fetch('poke/pokedex.json')
       let legendary = pokemon.species.includes("Legendary") || pokemon.description.includes("legendary");
       console.log(pokemon.species);
       console.log(`${pokemon.name} is Legendary? ${legendary}`);
-      if(legendary) {
+      if (legendary) {
         if (!currentContainer.classList.contains('legendary')) {
           currentContainer.classList.add('legendary');
           particleContainer.style.display = 'block';
         }
       }
       else {
-        if(currentContainer.classList.contains('legendary')) {
+        if (currentContainer.classList.contains('legendary')) {
           currentContainer.classList.remove('legendary');
           particleContainer.style.display = 'none';
         }
@@ -265,10 +279,12 @@ fetch('poke/pokedex.json')
       nextElement.innerHTML = '';
 
       let canvasElement = document.getElementById('myChart'); // Get existing canvas element
-      
+
       if (pokemon.evolution) {
         lineContainer.style.display = 'block';
         if (pokemon.evolution.next) {
+          nextElement.style.display = 'flex';
+          prevElement.style.display = 'flex';
           lineContainer.style.display = 'block';
           next = true;
           console.log(`Next: ${pokemon.evolution.next[0][0]}`);
@@ -285,6 +301,8 @@ fetch('poke/pokedex.json')
 
         }
         if (pokemon.evolution.prev) {
+          nextElement.style.display = 'flex';
+          prevElement.style.display = 'flex';
           lineContainer.style.display = 'block';
           prev = true;
           console.log(`Prev: ${pokemon.evolution.prev[0]}`);
@@ -297,7 +315,7 @@ fetch('poke/pokedex.json')
 
 
       }
-      if(!prev && !next) {
+      if (!prev && !next) {
         lineContainer.style.display = 'none';
 
       }
@@ -311,7 +329,7 @@ fetch('poke/pokedex.json')
       displayElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
-            ${legendary ? `<p id="legendaryTitle">Legendary</p>`: ''}
+            
             <div class="evos">
               ${prev ? `<p>Prev: ${prevName}</p>` : ''}
               ${next ? `<p>Next: ${nextName}</p>` : ''}
@@ -320,8 +338,10 @@ fetch('poke/pokedex.json')
           <div class="images">
             <div class="type-images">${typeImages}</div>
             <img src="${pokemon.image.thumbnail}" alt="" id="big-image">
+            ${legendary ? `<p id="legendaryTitle">Legendary</p>` : '<p></p>'}  
           </div>
           <canvas id="myChart"></canvas>
+          
         `;
 
       if (pokemon.base) {
@@ -394,50 +414,52 @@ fetch('poke/pokedex.json')
         `;
 
 
-        if(pokemon.base){if (myChartNext) {
-          myChartNext.destroy();
-        }
+        if (pokemon.base) {
+          if (myChartNext) {
+            myChartNext.destroy();
+          }
 
-        const ctx = document.getElementById('myChartNext').getContext('2d');
-        myChartNext = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['HP', 'Attack', 'Defense', 'Speed'],
-            datasets: [{
-              label: pokemon.name.english,
-              data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
-              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
+          const ctx = document.getElementById('myChartNext').getContext('2d');
+          myChartNext = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['HP', 'Attack', 'Defense', 'Speed'],
+              datasets: [{
+                label: pokemon.name.english,
+                data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+              }]
             },
-            plugins: {
-              afterDraw: function (chart) {
-                var ctx = chart.ctx;
-                chart.data.datasets.forEach(function (dataset, i) {
-                  var meta = chart.getDatasetMeta(i);
-                  if (!meta.hidden) {
-                    meta.data.forEach(function (element, index) {
-                      // Draw the value inside the bar
-                      var data = dataset.data[index];
-                      ctx.fillStyle = 'black';
-                      ctx.font = '12px Open Sans';
-                      ctx.textAlign = 'center';
-                      ctx.textBaseline = 'middle';
-                      ctx.fillText(data, element.x, element.y - 10);
-                    });
-                  }
-                });
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              },
+              plugins: {
+                afterDraw: function (chart) {
+                  var ctx = chart.ctx;
+                  chart.data.datasets.forEach(function (dataset, i) {
+                    var meta = chart.getDatasetMeta(i);
+                    if (!meta.hidden) {
+                      meta.data.forEach(function (element, index) {
+                        // Draw the value inside the bar
+                        var data = dataset.data[index];
+                        ctx.fillStyle = 'black';
+                        ctx.font = '12px Open Sans';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(data, element.x, element.y - 10);
+                      });
+                    }
+                  });
+                }
               }
             }
-          }
-        });}
+          });
+        }
       }
       if (prev) {
         console.log(prevData);
@@ -462,53 +484,55 @@ fetch('poke/pokedex.json')
         `;
 
 
-        if(pokemon.base){if (myChartPrev) {
-          myChartPrev.destroy();
-        }
+        if (pokemon.base) {
+          if (myChartPrev) {
+            myChartPrev.destroy();
+          }
 
-        const ctx = document.getElementById('myChartPrev').getContext('2d');
-        myChartPrev = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['HP', 'Attack', 'Defense', 'Speed'],
-            datasets: [{
-              label: pokemon.name.english,
-              data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
-              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
+          const ctx = document.getElementById('myChartPrev').getContext('2d');
+          myChartPrev = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['HP', 'Attack', 'Defense', 'Speed'],
+              datasets: [{
+                label: pokemon.name.english,
+                data: [pokemon.base.HP, pokemon.base.Attack, pokemon.base.Defense, pokemon.base.Speed],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+              }]
             },
-            plugins: {
-              afterDraw: function (chart) {
-                var ctx = chart.ctx;
-                chart.data.datasets.forEach(function (dataset, i) {
-                  var meta = chart.getDatasetMeta(i);
-                  if (!meta.hidden) {
-                    meta.data.forEach(function (element, index) {
-                      // Draw the value inside the bar
-                      var data = dataset.data[index];
-                      ctx.fillStyle = 'black';
-                      ctx.font = '12px Open Sans';
-                      ctx.textAlign = 'center';
-                      ctx.textBaseline = 'middle';
-                      ctx.fillText(data, element.x, element.y - 10);
-                    });
-                  }
-                });
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              },
+              plugins: {
+                afterDraw: function (chart) {
+                  var ctx = chart.ctx;
+                  chart.data.datasets.forEach(function (dataset, i) {
+                    var meta = chart.getDatasetMeta(i);
+                    if (!meta.hidden) {
+                      meta.data.forEach(function (element, index) {
+                        // Draw the value inside the bar
+                        var data = dataset.data[index];
+                        ctx.fillStyle = 'black';
+                        ctx.font = '12px Open Sans';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(data, element.x, element.y - 10);
+                      });
+                    }
+                  });
+                }
               }
             }
-          }
-        });}
+          });
+        }
       }
 
-      if(pokemon.base) {
+      if (pokemon.base) {
         console.log(prevData);
         if (prevData) { prevStats = [prevData.base.HP, prevData.base.Attack, prevData.base.Defense, prevData.base.Speed]; }
         let currentStats = [currentData.base.HP, currentData.base.Attack, currentData.base.Defense, currentData.base.Speed];
