@@ -230,6 +230,7 @@ fetch('poke/pokedex.json')
       console.log(`displaying pokemon: ${pokemon.name.english}`);
       statDistContainer.style.display = 'none';
       searchContainer.style.display = 'flex';
+      storyContainer.style.display = 'none';
       let prev = false;
       let next = false;
       let prevData;
