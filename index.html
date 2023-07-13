@@ -2,265 +2,327 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Data Visualisation</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="stylesheet" href="particles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Data Visualisation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="particles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="pokeBg"></div>
-    <div class="sidebar">
-        <div class="searchBar" id="legendary">
-            
-            <button class="accordion active" id="searchBtn">Search</button>
-                
-            
-            <div class="panel">
-                <div class="search-container">
-                    <div class="search">
-                        <input type="text" placeholder="Search" id="search">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </div>
-                    <div class="rounded-box">
-                        Search in the box above to find a Pokemon!
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="endContainer">
-            <div class="statDist">
-                <button class="accordion" id="storyBtn">Story</button>
-                <button class="accordion" id="statBtn">Stat Dist</button>
-            </div>
-            <div class="credits">
-                <span id="madeby">Made by</span><br>
-                <span>lillestkittykat | miguelzinho | seenu</span>
-            </div>
-        </div>
-        
-    </div>
-    <div id="particle-container">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-    <div id="content">
+  <div class="pokeBg"></div>
+  <div class="sidebar">
+    <div class="searchBar" id="legendary">
 
-        <div class="poke-row">
-            <div class="display-pokemon" id="prev">
-            </div>
-            <div class="display-pokemon big" id="current">
-                <div class="display-header">
-                    <h3>Display Pokemon</h3>
-                </div>
-                <p>Search to the left to display a Pokemon!</p>
-            </div>
-            <div class="display-pokemon" id="next">
-            </div>
-        </div>
-        <div class="botrow">
-            <div class="lineContainer">
-                <canvas id="evolution"></canvas>
-            </div>
-            <div class="icon">
+      <button class="accordion active" id="searchBtn">Search</button>
 
-            </div>
-        </div>
-        <!-- <canvas id="myChart"></canvas> -->
-    </div>
-    <div class="statDistWindow">
-        <h3>Distribution of Pokemon by Type</h3>
-        <div class="graphs">
-            <div class="graphBox" id="gen1">
-                <h3>Generation 1</h3>
-                <p class="count1">Total Pokemon: 151</p>
-                <canvas class="statGraph" id="statGraph1"></canvas>
-                <button class="sel1">Select</button>
-            </div>
-            <div class="graphBox" id="gen2">
-                <h3>Generation 2</h3>
-                <p class="count2">Total Pokemon: 251</p>
-                <canvas class="statGraph" id="statGraph2"></canvas>
-                <button class="sel2">Select</button>
-            </div>
-            <div class="graphBox" id="gen3">
-                <h3>Generation 3</h3>
-                <p class="count3">Total Pokemon: 386</p>
-                <canvas class="statGraph" id="statGraph3"></canvas>
-                <button class="sel3">Select</button>
-            </div>
-            <div class="graphBox" id="gen4">
-                <h3>Generation 4</h3>
-                <p class="count4">Total Pokemon: 493</p>
-                <canvas class="statGraph" id="statGraph4"></canvas>
-                <button class="sel4">Select</button>
-            </div>
-            <div class="graphBox" id="gen5">
-                <h3>Generation 5</h3>
-                <p class="count5">Total Pokemon: 649</p>
-                <canvas class="statGraph" id="statGraph5"></canvas>
-                <button class="sel5">Select</button>
-            </div>
-            <div class="graphBox" id="gen6">
-                <h3>Generation 6</h3>
-                <p class="count6">Total Pokemon: 721</p>
-                <canvas class="statGraph" id="statGraph6"></canvas>
-                <button class="sel6">Select</button>
-            </div>
-            <div class="graphBox" id="gen7">
-                <h3>Generation 7</h3>
-                <p class="count7">Total Pokemon: 801</p>
-                <canvas class="statGraph" id="statGraph7"></canvas>
-                <button class="sel7">Select</button>
-            </div>
-            <div class="lineGen">
-                <h3>Generational Increases</h3>
-                <canvas class="lineGenGraph"></canvas>
-            </div>
-            <div class="selectedPokemon">
-                <h3 id="genTitle">Generation <span id="gen"></span> introduced <span id="num"></span> Pokemon,
-                    including:</h3>
-                <div class="genPokemon">
 
-                </div>
-            </div>
+      <div class="panel">
+        <div class="search-container">
+          <div class="search">
+            <input type="text" placeholder="Search" id="search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </div>
+          <div class="rounded-box">
+            Search in the box above to find a Pokemon!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="endContainer">
+      <div class="statDist">
+        <button class="accordion" id="storyBtn">Story</button>
+        <button class="accordion" id="statBtn">Stat Dist</button>
+      </div>
+      <div class="credits">
+        <span id="madeby">Made by</span><br>
+        <span>lillestkittykat | miguelzinho | seenu</span>
+      </div>
+    </div>
+
+  </div>
+  <div id="particle-container">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div id="content">
+
+    <div class="poke-row">
+      <div class="display-pokemon" id="prev">
+      </div>
+      <div class="display-pokemon big" id="current">
+        <div class="display-header">
+          <h3>Display Pokemon</h3>
+        </div>
+        <p>Search to the left to display a Pokemon!</p>
+      </div>
+      <div class="display-pokemon" id="next">
+      </div>
+    </div>
+    <div class="botrow">
+      <div class="lineContainer">
+        <canvas id="evolution"></canvas>
+      </div>
+      <div class="icon">
+
+      </div>
+    </div>
+    <!-- <canvas id="myChart"></canvas> -->
+  </div>
+  <div class="statDistWindow">
+    <h3>Distribution of Pokemon by Type</h3>
+    <div class="graphs">
+      <div class="graphBox" id="gen1">
+        <h3>Generation 1</h3>
+        <p class="count1">Total Pokemon: 151</p>
+        <canvas class="statGraph" id="statGraph1"></canvas>
+        <button class="sel1">Select</button>
+      </div>
+      <div class="graphBox" id="gen2">
+        <h3>Generation 2</h3>
+        <p class="count2">Total Pokemon: 251</p>
+        <canvas class="statGraph" id="statGraph2"></canvas>
+        <button class="sel2">Select</button>
+      </div>
+      <div class="graphBox" id="gen3">
+        <h3>Generation 3</h3>
+        <p class="count3">Total Pokemon: 386</p>
+        <canvas class="statGraph" id="statGraph3"></canvas>
+        <button class="sel3">Select</button>
+      </div>
+      <div class="graphBox" id="gen4">
+        <h3>Generation 4</h3>
+        <p class="count4">Total Pokemon: 493</p>
+        <canvas class="statGraph" id="statGraph4"></canvas>
+        <button class="sel4">Select</button>
+      </div>
+      <div class="graphBox" id="gen5">
+        <h3>Generation 5</h3>
+        <p class="count5">Total Pokemon: 649</p>
+        <canvas class="statGraph" id="statGraph5"></canvas>
+        <button class="sel5">Select</button>
+      </div>
+      <div class="graphBox" id="gen6">
+        <h3>Generation 6</h3>
+        <p class="count6">Total Pokemon: 721</p>
+        <canvas class="statGraph" id="statGraph6"></canvas>
+        <button class="sel6">Select</button>
+      </div>
+      <div class="graphBox" id="gen7">
+        <h3>Generation 7</h3>
+        <p class="count7">Total Pokemon: 801</p>
+        <canvas class="statGraph" id="statGraph7"></canvas>
+        <button class="sel7">Select</button>
+      </div>
+      <div class="lineGen">
+        <h3>Generational Increases</h3>
+        <canvas class="lineGenGraph"></canvas>
+      </div>
+      <div class="selectedPokemon">
+        <h3 id="genTitle">Generation <span id="gen"></span> introduced <span id="num"></span> Pokemon,
+          including:</h3>
+        <div class="genPokemon">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="storyEvo">
+    <header>
+      <h1 class="site-title">The Evolution of Pokémon</h1>
+    </header>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">The Birth of Pokémon</h2>
+        <div class="entry">
+          <img src="images/diamond.jpg" alt="">
+          <p>In 1996, Pokémon made its debut with the release of Pokémon Red and Green for the Game Boy in Japan.
+            Developed
+            by Game Freak and published by Nintendo, Pokémon introduced players to a world teeming with mysterious
+            creatures
+            known as Pokémon. The goal was to become a Pokémon Trainer, capture Pokémon, train them, and compete against
+            other Trainers.</p>
         </div>
 
-    </div>
-    <div class="storyEvo">
-        <header>
-            <h1 class="site-title">The Evolution of Pokémon</h1>
-          </header>
-          <section class="diagonal">
-            <div class="wrapper">
-              <h2 class="section-title">The Birth of Pokémon</h2>
-              <div class="entry">
-                <img src="images/diamond.jpg" alt=""><p>In 1996, Pokémon made its debut with the release of Pokémon Red and Green for the Game Boy in Japan. Developed
-                  by Game Freak and published by Nintendo, Pokémon introduced players to a world teeming with mysterious creatures
-                  known as Pokémon. The goal was to become a Pokémon Trainer, capture Pokémon, train them, and compete against
-                  other Trainers.</p>
-              </div>
-        
-            </div>
-          </section>
-        
-        
-        
-        
-          <section class="diagonal">
-            <div class="wrapper">
-              <h2 class="section-title">The Pokémon Craze</h2>
-              <div class="entry">
-                <p>The release of Pokémon in the late '90s sparked a global phenomenon. The trading card game, animated TV series,
-                  movies, and merchandise quickly became a cultural sensation. Children everywhere were enthralled by the
-                  adventures of Ash Ketchum and his loyal companion Pikachu, as they traveled through various regions, challenged
-                  Gym Leaders, and aimed to become Pokémon Masters.</p><img src="images/pokeball.png" alt="" id="noshadow">
-              </div>
-        
-            </div>
-          </section>
-        
-          <section class="diagonal">
-            <div class="wrapper">
-              <h2 class="section-title">The Evolution of Pokémon Games</h2>
-              <div class="entry">
-                <p><b>Pokémon Red and Green (1996 - Generation 1)</b> - In Pokémon Red and Green, players take on the role of a
-                  young trainer who sets out on a journey to become the Pokémon Champion. Along the way, they must collect
-                  Pokémon, battle other trainers, and complete the Pokédex. The games are set in the Kanto region, which is based
-                  on the Japanese region of Honshu.
-                  Pokémon Red and Green were a critical and commercial success. They were praised for their innovative gameplay,
-                  their addictive nature, and their colorful graphics. The games have sold over 40 million copies worldwide,
-                  making them some of the best-selling video games of all time.</p><img src="images/red.jpg" alt="">
-              </div>
-              <div class="entry">
-                <img src="images/gold.webp" alt=""><p><b>Gold and Silver (Generation 2): </b> In 1999, Pokémon Gold and Silver were released, introducing the Johto
-                  region, 100 new
-                  Pokémon, and a real-time clock system.</p>
-              </div>
-              <div class="entry">
-                <p><b>Ruby and Sapphire: 2002 (Generation 3)</b> brought the release of Pokémon Ruby and Sapphire, introducing the
-                  Hoenn region, double battles, and abilities for Pokémon.</p><img src="images/ruby.webp" alt="">
-              </div>
-              <div class="entry">
-                <img src="images/diamond.jpg" alt=""><p><b>Diamond and Pearl (Generation 5): In 2006,</b> Pokémon Diamond and Pearl debuted on the Nintendo DS,
-                  unveiling the Sinnoh
-                  region, online capabilities, and new evolutions for existing Pokémon.</p>
-              </div>
-              <div class="entry">
-                <p><b>Pokemon Black and White (2010 - Generation 5)</b> were released on Nintendo DS, featuring new pokemon,
-                  enhanced graphics, the ability to use the touchscreen and the ability to battle other trainers online.</p><img src="images/bandw.jpg" alt="">
-              </div>
-              <div class="entry">
-                <img src="images/xandy.jpg" alt=""><p><b>X and Y: 2013 (Generation 6)</b> saw the release of Pokémon X and Y, the first main-series Pokémon games on
-                  the Nintendo 3DS. These games introduced the Kalos region, Mega Evolution, and a fully 3D world.</p>
-              </div>
-              <div class="entry">
-                <p><b>Sun and Moon (2016 - Generation 7): </b>these introduced 153 new pokemon, the ability to use Z-Moves to
-                  empower pokemon further tan normal, and Alola forms, exclusive to the region featured in the game.</p><img src="images/sun.jpg" alt="">
-              </div>
-        
-            </div>
-          </section>
-        
-          <section class="diagonal">
-            <div class="wrapper">
-              <h2 class="section-title">Pokémon Go</h2>
-              <div class="entry">
-                <img src="images/go.jpg" alt=""><p>In 2016, Pokémon Go, a mobile augmented reality game developed by Niantic in collaboration with The Pokémon
-                  Company, took the world by storm. The game allowed players to catch Pokémon in the real world using their
-                  smartphones, encouraging outdoor exploration and social interaction.</p>
-              </div>
-        
-            </div>
-          </section>
-        
-          <section class="diagonal">
-            <div class="wrapper">
-              <h2 class="section-title">And Much More...</h2>
-              <p>Beyond the games, Pokémon expanded into various forms of media, including an animated TV series that continues
-                to this day, an extensive collection of movies, trading card games, manga, and merchandise, ensuring that fans
-                could immerse themselves in the world of Pokémon beyond the games.</p>
-        
-            </div>
-          </section>
-    </div>
-    <script src="script.js"></script>
+      </div>
+    </section>
+
+
+
+
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">The Growth of Pokémon</h2>
+        <div class="entry">
+          <p>The growth of Pokémon over the years has been remarkable, both in terms of the number of Pokémon introduced
+            and the varieties of Pokémon explored in each video game. Pokémon is a franchise that began in 1996 with the
+            release of Pokémon Red and Green (Blue outside of Japan) for the Game Boy. Since then, the Pokémon Company
+            has consistently expanded the franchise, introducing new generations of Pokémon and innovative gameplay
+            features in each installment.</p><img src="images/red.jpg" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation II</h2>
+        <div class="entry">
+          <ul>(Pokémon Gold, Silver, Crystal):
+
+            <li>Introduction of 100 new Pokémon, expanding the total to 251.</li>
+            <li>The concept of breeding Pokémon to create offspring with specific traits.</li>
+            <li>The addition of a real-time clock, introducing day and night cycles.</li>
+            <li>The introduction of held items for Pokémon.</li>
+            <li>The ability to revisit the region from the previous generation.</li>
+          </ul><img src="images/gold.webp" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation III</h2>
+        <div class="entry">
+          <ul>
+            Generation III (Pokémon Ruby, Sapphire, Emerald):
+
+            <li>Introduction of 135 new Pokémon, bringing the total to 386.</li>
+            <li>Double battles, allowing players to battle with two Pokémon on each side.</li>
+            <li>Pokémon Abilities, unique traits that provide various effects in battles.</li>
+            <li>The introduction of Pokémon Contests, where Pokémon compete in different performance categories.</li>
+            <li>The Battle Frontier, a post-game facility with various battle challenges.</li>
+          </ul><img src="images/ruby.webp" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation IV</h2>
+        <div class="entry">
+          <ul>
+            Generation IV (Pokémon Diamond, Pearl, Platinum):
+            <li>Introduction of 107 new Pokémon, expanding the roster to 493.</li>
+            <li>The physical and special split for moves, categorizing them based on their mechanics.</li>
+            <li>The introduction of the Global Trade Station (GTS) for online trading.</li>
+            <li>Wi-Fi battles and trading, allowing players to connect and battle remotely.</li>
+            <li>The Underground, a new feature for secret base customization and treasure hunting.</li>
+          </ul> <img src="images/diamond.jpg" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation V</h2>
+        <div class="entry">
+          <ul>
+            Generation V (Pokémon Black, White, Black 2, White 2):
+            <li>Introduction of 156 new Pokémon, bringing the total to 649.</li>
+            <li>Fully animated battle sequences and improved graphics.</li>
+            <li>The addition of Seasons, with different Pokémon appearing based on the time of year.</li>
+            <li>The introduction of the Dream World, a feature for online activities and obtaining special Pokémon.</li>
+            <li> The Pokémon World Tournament, featuring battles against iconic trainers from previous generations.</li>
+          </ul><img src="images/bandw.jpg" alt="">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation VI</h2>
+        <div class="entry">
+          <ul>
+            Generation VI (Pokémon X, Y):
+            <li>Introduction of 72 new Pokémon, expanding the roster to 721.</li>
+            <li>The transition to 3D graphics and enhanced visuals.</li>
+            <li>The introduction of Mega Evolution, a temporary form change that boosts Pokémon's stats and abilities.
+            </li>
+            <li>The Player Search System (PSS), allowing for easier online interactions with other players.</li>
+            <li>The introduction of the Fairy type, a new type that balanced the metagame.</li>
+          </ul><img src="images/xandy.jpg" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Generation VII</h2>
+        <div class="entry">
+          <ul>
+            Generation VII (Pokémon Sun, Moon, Ultra Sun, Ultra Moon):
+            <li>Introduction of 80 new Pokémon, bringing the total to 801.</li>
+            <li>The removal of Gym Battles, replaced by Island Challenges.</li>
+            <li>The Alola region, with a unique setting and regional forms of existing Pokémon.</li>
+            <li>The introduction of Z-Moves, powerful special moves that can be used once per battle.</li>
+            <li>The Rotom Pokédex, a talking Pokédex with additional features and interaction.</li>
+          </ul><img src="images/sun.jpg" alt="" id="noshadow">
+        </div>
+
+      </div>
+    </section>
+
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">Pokémon Go</h2>
+        <div class="entry">
+          <img src="images/go.jpg" alt="">
+          <p>In 2016, Pokémon Go, a mobile augmented reality game developed by Niantic in collaboration with The Pokémon
+            Company, took the world by storm. The game allowed players to catch Pokémon in the real world using their
+            smartphones, encouraging outdoor exploration and social interaction.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="diagonal">
+      <div class="wrapper">
+        <h2 class="section-title">And Much More...</h2>
+        <p>Beyond the games, Pokémon expanded into various forms of media, including an animated TV series that
+          continues
+          to this day, an extensive collection of movies, trading card games, manga, and merchandise, ensuring that fans
+          could immerse themselves in the world of Pokémon beyond the games.</p>
+
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
 
 </body>
 

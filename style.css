@@ -707,6 +707,19 @@ li a {
 
   opacity: 1;
 }
+.wrapper ul {
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 20px;
+  transition: max-height 0.5s, opacity 0.5s;
+}
+
+.wrapper:hover ul {
+  max-height: 900px;
+  /* Adjust the height value as needed */
+
+  opacity: 1;
+}
 
 .wrapper img {
   max-height: 0;
@@ -742,4 +755,8 @@ li a {
   flex-direction: row;
   font-size: 1rem;
   align-items: center;
+}
+
+li {
+  margin-block: 3px;
 }
