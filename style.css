@@ -1,10 +1,8 @@
-
-
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  
+
   display: flex;
   overflow: hidden;
   /* a nice modern font*/
@@ -21,10 +19,10 @@ body {
 .credits {
   color: white;
   text-align: center;
-  
+
 }
 
-.credits > span {
+.credits>span {
   color: black;
   font-size: 0.7rem;
 }
@@ -52,7 +50,8 @@ body {
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: top 20px !important;
-  overflow-y: auto; /* Enable vertical scrolling within the sidebar */
+  overflow-y: auto;
+  /* Enable vertical scrolling within the sidebar */
 }
 
 #content {
@@ -61,7 +60,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  
+
   justify-content: space-between;
   height: 100vh;
   margin: 0;
@@ -69,14 +68,14 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
-  
+
 
   /* set background color opacity */
-  
+
 }
 
 .endContainer {
-  
+
   position: relative;
   bottom: 25px;
 }
@@ -111,7 +110,7 @@ body {
   z-index: 2;
   background: linear-gradient(to top, gray, white);
   margin: 0;
-  
+
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
@@ -123,7 +122,7 @@ body {
   font-family: 'Poppins';
   font-size: 1.2rem;
   cursor: pointer;
-  padding: 18px;
+  padding: 7px 15px;
   width: 100%;
   text-align: left;
   border: 4px solid white;
@@ -146,10 +145,10 @@ body {
   opacity: 0.4;
   margin-right: 100px;
   margin-left: 100px;
-  
+
 }
 
-.icon > img {
+.icon>img {
   top: -50px;
   width: 100px;
   mix-blend-mode: multiply;
@@ -163,7 +162,7 @@ ul {
   list-style-type: none;
   margin: 5px;
   padding-left: 5px;
-  
+
 }
 
 li {
@@ -173,10 +172,10 @@ li {
 li a {
   text-decoration: none;
   padding: 3px 5px;
-  
+
   text-shadow: 0px 0px 1px rgb(2, 2, 2);
   border-radius: 3px;
-  
+
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -197,9 +196,9 @@ li a {
 .panel {
   padding: 0 18px;
   background-color: transparent;
-  
+
   overflow: hidden;
-  
+
   /* add more space at the bottom */
   padding-bottom: 0px;
   border-bottom: 1px solid gray;
@@ -215,12 +214,12 @@ li a {
   height: 30px;
   display: flex;
   cursor: pointer;
-  
+
   padding: 5px 10px;
   background-color: white;
   border-radius: 30px;
   align-items: center;
-  
+
   box-shadow: 0px 0px 5px gray;
 
 
@@ -230,7 +229,7 @@ li a {
 
 .search input {
   width: 100px;
-  
+
   outline: none;
   border: none;
   font-weight: 500;
@@ -251,8 +250,8 @@ li a {
 }
 
 .rounded-box {
-  
-  background-color: rgba(255,255,255,0.6);
+
+  background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid gray;
   box-shadow: 0px 0px 10px gray;
   padding: 8px;
@@ -285,7 +284,7 @@ li a {
   margin-top: 5px;
   margin-bottom: 0;
   font-size: 1.8rem !important;
-  
+
 }
 
 .display-header p {
@@ -295,10 +294,10 @@ li a {
 
 #types {
   width: 100px;
-  
+
 }
 
-.types > h3 {
+.types>h3 {
   margin: 0 5px;
   margin-top: 0px;
   padding: 0;
@@ -314,7 +313,7 @@ li a {
   justify-content: space-between;
   /* what is the one for text size */
   text-align: center;
-  
+
   /* change font size */
   font-size: 1rem;
   margin: 10px;
@@ -326,7 +325,7 @@ li a {
 
 }
 
-.display-pokemon > p {
+.display-pokemon>p {
   padding: 0 10px;
   margin: 10px 5px;
 }
@@ -359,7 +358,7 @@ li a {
   border-radius: 5px;
 }
 
-.images > img {
+.images>img {
   margin: 10px;
   width: 150px;
 
@@ -391,12 +390,15 @@ li a {
   font-size: 2em;
 }
 
-#next, #prev {
+#next,
+#prev {
   display: none;
 }
 
-#myChart, #myChartNext, #myChartPrev {
-  background-color: rgba(255,255,255,0.6);
+#myChart,
+#myChartNext,
+#myChartPrev {
+  background-color: rgba(255, 255, 255, 0.6);
   border-top: 1px solid #a3a3a3;
   position: relative;
   overflow: hidden;
@@ -413,8 +415,8 @@ li a {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  
-  
+
+
 }
 
 .images #big-image {
@@ -428,11 +430,11 @@ li a {
   justify-content: center;
   border-radius: 5px;
   box-shadow: 0px 0px 5px lightgrey;
-  background-color: rgb(255, 255, 255,0.5);
-  
+  background-color: rgb(255, 255, 255, 0.5);
+
   width: 32%;
   height: 80%;
-  
+
 }
 
 
@@ -455,7 +457,7 @@ li a {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  
+
 }
 
 .graphBox {
@@ -472,8 +474,8 @@ li a {
   margin: 0;
   padding: 50px 10px;
   gap: 0;
-  
- 
+
+
 }
 
 .graphBox.selected {
@@ -497,9 +499,9 @@ li a {
 }
 
 .graphBox h3 {
-  margin: 0; 
+  margin: 0;
   background-color: white;
-  
+
   padding: 5px 10px;
   border-radius: 15px;
   border: 1px solid lightgray;
@@ -515,14 +517,14 @@ li a {
   padding: 5px;
 }
 
-.genPokemon > img {
+.genPokemon>img {
   padding: -5px;
   border-radius: 50%;
   margin: 0;
 }
 
-.genPokemon > img:hover {
-  background-color: rgba(255,255,255,0.8);
+.genPokemon>img:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .selectedPokemon {
@@ -537,7 +539,7 @@ li a {
   border-radius: 10px;
   flex-wrap: wrap;
   position: relative;
-  
+
 }
 
 .lineGenGraph {
@@ -545,12 +547,12 @@ li a {
   top: -10px;
 }
 
-.selectedPokemon > h3 {
+.selectedPokemon>h3 {
   display: none;
   position: relative;
   margin-top: 5px;
   text-shadow: 0px 0px 1px white;
-  
+
 }
 
 .statDist {
@@ -559,17 +561,17 @@ li a {
   width: 100%;
 }
 
-.statDistWindow > h3 {
+.statDistWindow>h3 {
   margin: 10px;
   margin-top: 20px;
 
 }
 
-.graphBox > p {
+.graphBox>p {
   margin: 0;
   padding: 0;
   position: relative;
-  
+
   font-size: 5;
 }
 
@@ -583,19 +585,19 @@ li a {
   height: 210px;
 }
 
-.lineGen > h3 {
+.lineGen>h3 {
   position: relative;
   top: -15px;
   margin: 0 5px;
   padding: 0;
 }
 
-.lineGen > canvas {
+.lineGen>canvas {
   margin: 0 5px;
   padding: 0;
 }
 
-.graphBox > button {
+.graphBox>button {
   width: 80%;
   height: 25px;
   content: '';
@@ -610,32 +612,134 @@ li a {
   align-self: center;
 }
 
-.graphBox > button:hover {
+.graphBox>button:hover {
   background-color: lightgray;
   cursor: pointer;
   color: gray;
 }
 
 .legendary {
-  
+
   border: 4px solid yellow !important;
   box-shadow: 0px 0px 20px lightyellow !important;
   margin-bottom: 100px;
-  
+
 }
 
 #legendaryTitle {
   font-size: 2rem;
   padding-top: 0px;
   background-color: rgb(255, 253, 105);
-  
+
   border-radius: 10px;
   border: 1px solid yellow;
   box-shadow: 0px 0px 10px yellow;
-  
+
   text-shadow: 0px 0px 10px rgb(46, 46, 0);
   color: yellow;
   padding: 5px 10px;
 
 }
 
+#storyBtn {
+  margin-block: 10px;
+}
+
+.storyEvo {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background: linear-gradient(to top, gray, white);
+  text-shadow: 0px 0px 4px black;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  height: 100vh;
+  margin: 0;
+}
+
+.diagonal {
+  position: relative;
+  isolation: isolate;
+
+
+}
+
+.diagonal::after {
+  content: '';
+  background-image: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  transform: skewY(-5deg);
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.diagonal:hover::after {
+  opacity: 1;
+}
+
+.wrapper {
+  max-width: 50rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper h2 {
+  padding-top: 20px;
+}
+
+.wrapper p {
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 20px;
+  transition: max-height 0.5s, opacity 0.5s;
+}
+
+.wrapper:hover p {
+  max-height: 900px;
+  /* Adjust the height value as needed */
+
+  opacity: 1;
+}
+
+.wrapper img {
+  max-height: 0;
+  margin-inline: 15px;
+  opacity: 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px gray;
+  transition: max-height 0.5s, opacity 0.5s;
+}
+
+#noshadow {
+  box-shadow: none;
+}
+
+.wrapper:hover img {
+
+  max-height: 150px;
+  opacity: 1;
+}
+
+.site-title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.25rem;
+}
+
+.entry {
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+  align-items: center;
+}

@@ -1,6 +1,7 @@
 var acc = document.getElementsByClassName("accordion");
 const searchContainer = document.querySelector('#content');
 const statDistContainer = document.querySelector('.statDistWindow');
+const storyContainer = document.querySelector('.storyEvo');
 
 
 var i;
@@ -11,16 +12,27 @@ let evolveChart = null;
 
 const searchButton = document.querySelector('#searchBtn');
 const statDistButton = document.querySelector('#statBtn');
+const storyButton = document.querySelector('#storyBtn');
 
 searchButton.addEventListener('click', function (event) {
   searchContainer.style.display = 'flex';
   statDistContainer.style.display = 'none';
+  storyContainer.style.display = 'none';
 });
 
 statDistButton.addEventListener('click', function (event) {
   searchContainer.style.display = 'none';
   statDistContainer.style.display = 'flex';
+  storyContainer.style.display = 'none';
 });
+
+storyButton.addEventListener('click', function (event) {
+  searchContainer.style.display = 'none';
+  statDistContainer.style.display = 'none';
+  storyContainer.style.display = 'flex';
+});
+
+
 
 const accordionButtons = document.querySelectorAll('.accordion');
 
