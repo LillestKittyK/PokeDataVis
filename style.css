@@ -653,7 +653,7 @@ li a {
   overflow-x: hidden;
   box-sizing: border-box;
   background: linear-gradient(to top, gray, white);
-  text-shadow: 0px 0px 4px black;
+  text-shadow: 0px 0px 3px  black;
   font-size: 1.25rem;
   line-height: 1.5;
   height: 100vh;
@@ -670,12 +670,39 @@ li a {
 .diagonal::after {
   content: '';
   background-image: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+  box-shadow: 0px 0px 10px gray;
   position: absolute;
   z-index: -1;
   inset: 0;
   transform: skewY(-5deg);
   transition: opacity 0.5s;
   opacity: 0;
+}
+#one.diagonal::after {
+  background-image: linear-gradient(45deg, red, yellow, green);
+  
+}
+
+#two.diagonal::after {
+  background-image: linear-gradient(45deg, gold, silver);
+}
+
+#three.diagonal::after {
+  background-image: linear-gradient(45deg, #E0115F, #007FFF, #50C878);
+}
+
+#four.diagonal::after {
+  background-image: linear-gradient(45deg, #B9F2FF, #FCEDEA, #E5E4E2);
+  
+}
+
+#five.diagonal::after {
+  background-image: linear-gradient(45deg, #FFFFFF, #000000);
+}
+
+#seven.diagonal::after {
+  background: url('images/sunmoon.png');
+  background-size: 100%;
 }
 
 .diagonal:hover::after {
@@ -759,4 +786,9 @@ li a {
 
 li {
   margin-block: 3px;
+}
+
+
+#seven {
+  
 }
