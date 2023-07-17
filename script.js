@@ -32,6 +32,109 @@ storyButton.addEventListener('click', function (event) {
   storyContainer.style.display = 'flex';
 });
 
+// create generation charts
+fetch('poke/output.json')
+  .then(response => response.json())
+  .then(data => {
+    const charts = [];
+    for (let generation = 2; generation <= 7; generation++) {
+      const typeColors = {
+        'grass': getColorForType('grass'),
+        'fire': getColorForType('fire'),
+        'water': getColorForType('water'),
+        'electric': getColorForType('electric'),
+        'bug': getColorForType('bug'),
+        'normal': getColorForType('normal'),
+        'poison': getColorForType('poison'),
+        'ground': getColorForType('ground'),
+        'fairy': getColorForType('fairy'),
+        'fighting': getColorForType('fighting'),
+        'psychic': getColorForType('psychic'),
+        'rock': getColorForType('rock'),
+        'ghost': getColorForType('ghost'),
+        'ice': getColorForType('ice'),
+        'dragon': getColorForType('dragon'),
+        'steel': getColorForType('steel'),
+        'dark': getColorForType('dark'),
+        'flying': getColorForType('flying')
+      };
+
+      const newData = data.filter(pokemon => pokemon.generation == generation);
+      const types = {};
+      for (const pokemon of newData) {
+        const type1 = pokemon.type1;
+        const type2 = pokemon.type2;
+
+        if (!types[type1]) {
+          types[type1] = 0;
+        }
+        types[type1] += 1;
+
+        if (type2) {
+          if (!types[type2]) {
+            types[type2] = 0;
+          }
+          types[type2] += 1;
+        }
+      }
+
+      const labels = Object.keys(types);
+      const values = Object.values(types);
+
+      const pieChart = {
+        type: "pie",
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            backgroundColor: labels.map(type => `rgba(${typeColors[type]}, 0.6)`)
+          }]
+        },
+        options: {
+
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            
+          },
+
+        }
+      };
+      charts.push(pieChart);
+      const canvas1 = document.querySelector(`.gen${generation}types`);
+      new Chart(canvas1, pieChart);
+      console.log('made a chart')
+    }
+
+
+  });
+
+const buttonsContainer = document.querySelector(".buttons");
+const storyBtns = buttonsContainer.querySelectorAll("button");
+const gen2types = document.querySelector(".gen2types");
+const imgTwo = document.querySelector('#img2');
+
+function clicked(event) {
+  const clickedButton = event.target;
+  const btnID = clickedButton.id;
+  const lastChar = btnID.slice(-1);
+  const chartTarget = document.querySelector(`.gen${lastChar}types`);
+  const imgTarget = document.querySelector(`#img${lastChar}`);
+  if (btnID.includes('chart')) {
+    chartTarget.style.display = 'block';
+    imgTarget.style.display = 'none';
+  }
+  else {
+    chartTarget.style.display = 'none';
+    imgTarget.style.display = 'block';
+  }
+
+
+
+}
 
 
 const accordionButtons = document.querySelectorAll('.accordion');
@@ -152,12 +255,14 @@ async function getPokeImages(generation) {
 
 
     const pokeImagesHTML = imgList.join('\n');
-    console.log(pokeImagesHTML);
+    // console.log(pokeImagesHTML);
     return pokeImagesHTML;
   } catch (error) {
     console.log('Error:', error);
   }
 }
+
+
 
 
 
@@ -786,7 +891,7 @@ fetch('poke/output.json')
   })
 
 function getColorForType(type) {
-  console.log(type);
+
   switch (type.toLowerCase()) {
     case 'grass':
       return '120, 200, 80'; // Green

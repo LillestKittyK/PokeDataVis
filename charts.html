@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pokémon Generation Charts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aqua;
+        }
+
+        canvas {
+            max-width: 500px;
+            max-height: 500px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="gen2charts">
+        <canvas class="gen2types"></canvas>
+    </div>
+    <div class="gen3charts">
+        <canvas class="gen3types"></canvas>
+    </div>
+    <div class="gen4charts">
+        <canvas class="gen4types"></canvas>
+    </div>
+    <div class="gen5charts">
+        <canvas class="gen5types"></canvas>
+    </div>
+    <div class="gen6charts">
+        <canvas class="gen6types"></canvas>
+    </div>
+    <div class="gen7charts">
+        <canvas class="gen7types"></canvas>
+    </div>
+    <script>
+        
+        fetch('poke/output.json')
+            .then(response => response.json())
+            .then(data => {
+                const charts = [];
+                for(let generation = 2; generation <= 7; generation++) {
+                    
+                
+                    const newData = data.filter(pokemon => pokemon.generation == generation);
+                    const types = {};
+                    for (const pokemon of newData) {
+                        const type1 = pokemon.type1;
+                        const type2 = pokemon.type2;
+
+                        if (!types[type1]) {
+                            types[type1] = 0;
+                        }
+                        types[type1] += 1;
+
+                        if (type2) {
+                            if (!types[type2]) {
+                                types[type2] = 0;
+                            }
+                            types[type2] += 1;
+                        }
+                    }
+
+                    const labels = Object.keys(types);
+                    const values = Object.values(types);
+
+                    const pieChart = {
+                        type: "pie",
+                        data: {
+                            labels,
+                            datasets: [{
+                                data: values,
+                                backgroundColor: ["#FF0000", "#00FF00", "#0000FF"], // Example colors, you can customize
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                        }
+                    };
+                    charts.push(pieChart);
+                    const canvas1 = document.querySelector(`.gen${generation}types`);
+                    new Chart(canvas1, pieChart);
+                }
+                
+                
+            });
+    </script>
+</body>
+
+</html>

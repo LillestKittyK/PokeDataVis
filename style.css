@@ -683,6 +683,7 @@ li a {
   
 }
 
+
 #two.diagonal::after {
   background-image: linear-gradient(45deg, gold, silver);
 }
@@ -720,6 +721,30 @@ li a {
 .wrapper h2 {
   padding-top: 20px;
 }
+
+.wrapper > .buttons {
+  position: relative;
+  top: -15px;
+  left: 30px;
+  max-height: 0;
+  overflow: hidden;
+}
+
+
+
+canvas {
+  
+  margin: 0;
+  padding: 0;
+  width: 100px;
+}
+
+.gen2charts {
+  width: 150px;
+  height: 150px;
+}
+
+
 
 .wrapper p {
   max-height: 0;
@@ -789,6 +814,3 @@ li {
 }
 
 
-#seven {
-  
-}

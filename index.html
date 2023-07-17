@@ -169,9 +169,15 @@
     </header>
     <section class="diagonal">
       <div class="wrapper">
+
         <h2 class="section-title">The Birth of Pokémon</h2>
+        <div class="buttons">
+          <button class="screenshot">Screenshot</button>
+          <button class="graph">Graph</button>
+        </div>
         <div class="entry">
           <img src="images/diamond.jpg" alt="">
+          <canvas class="birthchart"></canvas>
           <p>In 1996, Pokémon made its debut with the release of Pokémon Red and Green for the Game Boy in Japan.
             Developed
             by Game Freak and published by Nintendo, Pokémon introduced players to a world teeming with mysterious
@@ -210,7 +216,17 @@
             <li>The addition of a real-time clock, introducing day and night cycles.</li>
             <li>The introduction of held items for Pokémon.</li>
             <li>The ability to revisit the region from the previous generation.</li>
-          </ul><img src="images/gold.webp" alt="" id="noshadow">
+          </ul>
+          <div class="buttons">
+            <button class="chart" id='chart2' onclick="clicked(event)">Chart</button>
+            <button class='screenshot' id="screenshot2" onclick="clicked(event)">Screenshot</button>
+          </div>
+          <img src="images/gold.webp" alt="" id="img2">
+          <div class="gen2charts">
+            
+            <canvas class="gen2types"></canvas>
+          </div>
+          
         </div>
 
       </div>
@@ -228,7 +244,16 @@
             <li>The introduction of Pokémon Contests, where Pokémon compete in different performance categories.</li>
             <li>The Battle Frontier, a post-game facility with various battle challenges.</li>
             <li>The Steel and Dark Types were added in this Generation.</li>
-          </ul><img src="images/ruby.webp" alt="" id="noshadow">
+          </ul>
+          <div class="buttons">
+            <button class="chart">Chart</button>
+            <button class="screenshot">Screenshot</button>
+          </div>
+          <div class="gen3charts">
+            <canvas class="gen3types"></canvas>
+
+          </div>
+          <img src="images/ruby.webp" alt="" id="noshadow">
         </div>
 
       </div>
@@ -244,7 +269,12 @@
             <li>The introduction of the Global Trade Station (GTS) for online trading.</li>
             <li>Wi-Fi battles and trading, allowing players to connect and battle remotely.</li>
             <li>The Underground, a new feature for secret base customization and treasure hunting.</li>
-          </ul> <img src="images/diamond.jpg" alt="" id="noshadow">
+          </ul>
+          <div class="gen4charts">
+            <canvas class="gen4types"></canvas>
+
+          </div>
+          <img src="images/diamond.jpg" alt="" id="noshadow">
         </div>
 
       </div>
@@ -260,8 +290,14 @@
             <li>The addition of Seasons, with different Pokémon appearing based on the time of year.</li>
             <li>The introduction of the Dream World, a feature for online activities and obtaining special Pokémon.</li>
             <li> The Pokémon World Tournament, featuring battles against iconic trainers from previous generations.</li>
-          </ul><img src="images/bandw.jpg" alt="">
+          </ul>
+          <div class="gen5charts">
+            <canvas class="gen5types"></canvas>
+
+          </div>
+          <img src="images/bandw.jpg" alt="">
         </div>
+
 
       </div>
     </section>
@@ -278,7 +314,12 @@
             <li>The Player Search System (PSS), allowing for easier online interactions with other players.</li>
             <li>The introduction of the Fairy type, a new type that balanced the metagame.</li>
             <li>The Fairy type was added in this Generation.</li>
-          </ul><img src="images/xandy.jpg" alt="" id="noshadow">
+          </ul>
+          <div class="gen6charts">
+            <canvas class="gen6types"></canvas>
+
+          </div>
+          <img src="images/xandy.jpg" alt="" id="noshadow">
         </div>
 
       </div>
@@ -294,7 +335,12 @@
             <li>The Alola region, with a unique setting and regional forms of existing Pokémon.</li>
             <li>The introduction of Z-Moves, powerful special moves that can be used once per battle.</li>
             <li>The Rotom Pokédex, a talking Pokédex with additional features and interaction.</li>
-          </ul><img src="images/sun.jpg" alt="" id="noshadow">
+          </ul>
+          <div class="gen7charts">
+            <canvas class="gen7types"></canvas>
+
+          </div>
+          <img src="images/sun.jpg" alt="" id="noshadow">
         </div>
 
       </div>
