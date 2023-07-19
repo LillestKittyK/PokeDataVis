@@ -2,12 +2,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-
   display: flex;
   overflow: hidden;
-
-
-
   font-family: 'Poppins', sans-serif;
 }
 
@@ -475,7 +471,10 @@ li a {
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
+  padding-inline: 20px;
   overflow-y: scroll;
+
+  
 
 
 }
