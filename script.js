@@ -4,6 +4,7 @@ const statDistContainer = document.querySelector(".statDistWindow");
 const storyContainer = document.querySelector(".storyEvo");
 
 var i;
+
 var currentlyOpen = null;
 let chartCreated = 0;
 let myChart = null;
@@ -255,14 +256,7 @@ fetch("poke/pokedex.json")
   .then((data) => {
     const result = data.map((item) => [item.id, item.name.english]);
 
-    const endTime = performance.now();
-    const executionTime = endTime - startTime;
-
     document.getElementById("search").addEventListener("keyup", searchPokemon);
-
-    function getPokemonByType(type) {
-      return data.filter((item) => item.type.includes(type));
-    }
 
     function searchPokemon() {
       const searchInput = document.getElementById("search").value.toLowerCase();
@@ -364,7 +358,7 @@ fetch("poke/pokedex.json")
 
       let prevStats;
       let nextStats;
-      let entry;
+
       const displayElement = document.querySelector("#current");
       const evolveChartElement = document.querySelector("#evolution");
       const prevElement = document.querySelector("#prev");
@@ -388,8 +382,6 @@ fetch("poke/pokedex.json")
 
       prevElement.innerHTML = "";
       nextElement.innerHTML = "";
-
-      let canvasElement = document.getElementById("myChart");
 
       if (pokemon.evolution) {
         lineContainer.style.display = "block";
@@ -424,12 +416,36 @@ fetch("poke/pokedex.json")
 
       chartCreated = 1;
 
+      // Produce type images for the pokemon
+
       const typeImages = pokemon.type
         .map(
           (type) =>
             `<img src="./images/type_${type.toLowerCase()}.png" alt="${type}" id="types">`
         )
         .join("");
+
+      // TODO : Add more types
+      const strengthsAndWeaknesses = getTypeAdvantagesAndWeaknesses(
+        pokemon.type.slice(0, 2).map((type) => type.toLowerCase())
+      );
+      const strengths = strengthsAndWeaknesses[0];
+      const weaknesses = strengthsAndWeaknesses[1];
+
+      const typeStrengthsDiv = document.getElementById("typeStrengths");
+      const typeWeaknessesDiv = document.getElementById("typeWeaknesses");
+
+      const strengthsHTML = 'Strengths:- ' + strengths
+        .map((type) => `<img src="images/type_${type}.png">`)
+        .join("");
+      const weaknessesHTML = 'Weaknesses:-  ' + weaknesses
+        .map((type) => `<img src="images/type_${type}.png">`)
+        .join("");
+
+      typeStrengthsDiv.innerHTML = strengthsHTML;
+      typeWeaknessesDiv.innerHTML = weaknessesHTML;
+
+      // const types = ["fire", "grass"]; // replace this with types from the pokemon
 
       displayElement.innerHTML = `
   <div class="display-header">
@@ -1017,3 +1033,91 @@ function findPokemonFromJson(id) {
       return entry;
     });
 }
+
+function getTypeAdvantagesAndWeaknesses(types) {
+  const typeData = {
+    normal: { strongAgainst: [], weakTo: ["fighting"] },
+    fighting: {
+      strongAgainst: ["normal", "rock", "steel", "ice", "dark"],
+      weakTo: ["flying", "psychic", "fairy"],
+    },
+    flying: {
+      strongAgainst: ["fighting", "bug", "grass"],
+      weakTo: ["rock", "electric", "ice"],
+    },
+    poison: {
+      strongAgainst: ["grass", "fairy"],
+      weakTo: ["ground", "psychic"],
+    },
+    ground: {
+      strongAgainst: ["poison", "rock", "steel", "fire", "electric"],
+      weakTo: ["water", "grass", "ice"],
+    },
+    rock: {
+      strongAgainst: ["flying", "bug", "fire", "ice"],
+      weakTo: ["fighting", "ground", "steel", "water", "grass"],
+    },
+    bug: {
+      strongAgainst: ["grass", "psychic", "dark"],
+      weakTo: ["flying", "rock", "fire"],
+    },
+    ghost: { strongAgainst: ["ghost", "psychic"], weakTo: ["dark", "ghost"] },
+    steel: {
+      strongAgainst: ["rock", "ice", "fairy"],
+      weakTo: ["fighting", "ground", "fire"],
+    },
+    fire: {
+      strongAgainst: ["bug", "steel", "grass", "ice"],
+      weakTo: ["ground", "rock", "water"],
+    },
+    water: {
+      strongAgainst: ["ground", "rock", "fire"],
+      weakTo: ["grass", "electric"],
+    },
+    grass: {
+      strongAgainst: ["ground", "rock", "water"],
+      weakTo: ["flying", "poison", "bug", "fire", "ice"],
+    },
+    electric: { strongAgainst: ["flying", "water"], weakTo: ["ground"] },
+    psychic: {
+      strongAgainst: ["fighting", "poison"],
+      weakTo: ["bug", "ghost", "dark"],
+    },
+    ice: {
+      strongAgainst: ["flying", "ground", "grass", "dragon"],
+      weakTo: ["fighting", "rock", "steel", "fire"],
+    },
+    dragon: { strongAgainst: ["dragon"], weakTo: ["ice", "dragon", "fairy"] },
+    dark: {
+      strongAgainst: ["ghost", "psychic"],
+      weakTo: ["fighting", "bug", "fairy"],
+    },
+    fairy: {
+      strongAgainst: ["fighting", "dragon", "dark"],
+      weakTo: ["poison", "steel"],
+    },
+  };
+
+  // Check if valid types are provided
+  const validTypes = Object.keys(typeData);
+  const selectedTypes = types.filter((type) =>
+    validTypes.includes(type.toLowerCase())
+  );
+
+  // Extract the strengths and weaknesses for each provided type
+  const strengths = selectedTypes.reduce((acc, type) => {
+    return acc.concat(typeData[type.toLowerCase()].strongAgainst);
+  }, []);
+
+  const weaknesses = selectedTypes.reduce((acc, type) => {
+    return acc.concat(typeData[type.toLowerCase()].weakTo);
+  }, []);
+
+  return [Array.from(new Set(strengths)), Array.from(new Set(weaknesses))];
+}
+
+// Example usage:
+const types = ["fire", "grass"];
+const [strengths, weaknesses] = getTypeAdvantagesAndWeaknesses(types);
+console.log("Strengths:", strengths); // Output: Strengths: [ 'bug', 'steel', 'grass', 'ice' ]
+console.log("Weaknesses:", weaknesses); // Output: Weaknesses: [ 'ground', 'rock', 'water', 'flying', 'poison', 'bug', 'fire', 'ice' ]

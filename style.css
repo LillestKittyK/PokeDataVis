@@ -145,8 +145,9 @@ body {
   height: 80%;
   opacity: 0.4;
   margin-right: 100px;
-  margin-left: 100px;
+  margin-left: 50px;
 }
+
 .icon>img {
   top: -50px;
   width: 100px;
@@ -218,11 +219,23 @@ li a {
   background: transparent;
 }
 
+.iconPair {
+  display: flex;
+  flex-direction: row;
+  width: 38%;
+}
 
 .types {
   margin: 0;
   padding: 0;
 }
+
+.types img {
+  width: 4rem;
+  height: 2rem;
+}
+
+
 .search-container {
   height: 100%;
 }
@@ -786,4 +799,15 @@ li {
   background-color: transparent;
   border: none;
   box-shadow: none;
+}
+
+.diffTypes {
+  display: flex;
+  font-size: 1rem;
+  background-color: rgba(255,255,255,0.6);
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 250px;
+  flex-wrap: wrap;
 }
