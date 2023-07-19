@@ -82,12 +82,13 @@ fetch('poke/output.json')
       const values = Object.values(types);
 
       const pieChart = {
-        type: "pie",
+        type: "polarArea",
         data: {
           labels,
           datasets: [{
             data: values,
-            backgroundColor: labels.map(type => `rgba(${typeColors[type]}, 0.6)`)
+            backgroundColor: labels.map(type => `rgba(${typeColors[type]}, 1)`),
+            borderColor: "transparent"
           }]
         },
         options: {
@@ -106,7 +107,7 @@ fetch('poke/output.json')
       charts.push(pieChart);
       const canvas1 = document.querySelector(`.gen${generation}types`);
       new Chart(canvas1, pieChart);
-      console.log('made a chart')
+      console.log(`made chart ${generation}`);
     }
 
 
@@ -121,7 +122,7 @@ function clicked(event) {
   const clickedButton = event.target;
   const btnID = clickedButton.id;
   const lastChar = btnID.slice(-1);
-  const chartTarget = document.querySelector(`.gen${lastChar}types`);
+  const chartTarget = document.querySelector(`.gen${lastChar}charts`);
   const imgTarget = document.querySelector(`#img${lastChar}`);
   if (btnID.includes('chart')) {
     chartTarget.style.display = 'block';
@@ -322,7 +323,7 @@ fetch('poke/pokedex.json')
             event.preventDefault();
             const pokemonId = Number(this.dataset.id);
             const pokemon = data.find(item => item.id === pokemonId);
-            console.log(pokemon);
+            
             displayPokemonInfo(pokemon);
           });
         });
@@ -333,6 +334,9 @@ fetch('poke/pokedex.json')
 
     function displayPokemonInfo(pokemon) {
       console.log(`displaying pokemon: ${pokemon.name.english}`);
+      searchButton.classList.add('active');
+      storyButton.classList.remove('active');
+      statDistButton.classList.remove('active');
       statDistContainer.style.display = 'none';
       searchContainer.style.display = 'flex';
       storyContainer.style.display = 'none';

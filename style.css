@@ -18,8 +18,10 @@ body {
 
 .credits {
   color: white;
+  position: relative;
+  top: -30px;
   text-align: center;
-
+  align-self: flex-end;
 }
 
 .credits>span {
@@ -58,7 +60,7 @@ body {
   z-index: 2;
   flex: 1;
   padding: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
 
   justify-content: space-between;
@@ -162,11 +164,12 @@ ul {
   list-style-type: none;
   margin: 5px;
   padding-left: 5px;
+  font-size: .9rem;
 
 }
 
 li {
-  margin: 10px;
+  margin: 3px;
 }
 
 li a {
@@ -597,6 +600,8 @@ li a {
   padding: 0;
 }
 
+
+
 .graphBox>button {
   width: 80%;
   height: 25px;
@@ -646,7 +651,7 @@ li a {
 }
 
 .storyEvo {
-  display: none;
+  display: flex;
   flex-direction: column;
   width: 100%;
   color: white;
@@ -676,7 +681,7 @@ li a {
   inset: 0;
   transform: skewY(-5deg);
   transition: opacity 0.5s;
-  opacity: 0;
+  opacity: 0.3;
 }
 #one.diagonal::after {
   background-image: linear-gradient(45deg, red, yellow, green);
@@ -722,32 +727,74 @@ li a {
   padding-top: 20px;
 }
 
-.wrapper > .buttons {
+.wrapper .buttons {
   position: relative;
-  top: -15px;
-  left: 30px;
-  max-height: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: none;
+  width: 100%;
+  transition: opacity 0.5s;
+  opacity: 0;
 }
 
 
 
-canvas {
+.wrapper:hover .buttons {
+  max-height: 100px;
+  opacity: 1;
+  border-bottom: 1px solid gray;
+}
+
+
+.wrapper button {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: rgb(82, 82, 82);
+}
+
+.wrapper button:hover {
+  background-color: white;
+  border-inline: 1px solid gray;
+}
+
+h3.chart {
+  font-size: 0.8rem;
+  position: relative;
+  top: -20px;
+  z-index: 999;
+  padding: 2px;
+  background-color: steelblue;
+  width: auto;
+  border-radius: 5px;
+  border: 1px solid white;
   
-  margin: 0;
-  padding: 0;
-  width: 100px;
+  
 }
 
-.gen2charts {
-  width: 150px;
-  height: 150px;
+[class^="gen"][class$="charts"] {
+  position: relative;
+  
+  width: 180px;
+  height: 180px;
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 5px gray;
+  border-radius: 20px;
+  margin: 10px;
+  display: none;
+  
 }
 
+.visContent canvas {
+  position: relative;
+  
+}
 
 
 .wrapper p {
-  max-height: 0;
   opacity: 0;
   padding-bottom: 20px;
   transition: max-height 0.5s, opacity 0.5s;
@@ -760,21 +807,23 @@ canvas {
   opacity: 1;
 }
 .wrapper ul {
-  max-height: 0;
+  max-height: 900px;
+  max-width: 30rem;
   opacity: 0;
   padding-bottom: 20px;
   transition: max-height 0.5s, opacity 0.5s;
 }
 
 .wrapper:hover ul {
-  max-height: 900px;
   /* Adjust the height value as needed */
 
   opacity: 1;
 }
 
+
+
 .wrapper img {
-  max-height: 0;
+  max-height: 150px;
   margin-inline: 15px;
   opacity: 0;
   margin-bottom: 20px;
@@ -789,7 +838,7 @@ canvas {
 
 .wrapper:hover img {
 
-  max-height: 150px;
+  
   opacity: 1;
 }
 
@@ -806,11 +855,37 @@ canvas {
   display: flex;
   flex-direction: row;
   font-size: 1rem;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.visContent {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  max-width: 20rem;
+  max-height: 250px;
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: transparent;
+  
+  border: none;
+}
+
+.wrapper:hover .visContent {
+  border: 1px dotted gray;
+  box-shadow: 0px 0px 5px gray;
+  background-color: rgba(255,255,255,0.5);
 }
 
 li {
   margin-block: 3px;
 }
 
-
+#noback {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}

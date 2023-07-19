@@ -18,34 +18,33 @@
 <body>
   <div class="pokeBg"></div>
   <div class="sidebar">
-    <div class="searchBar" id="legendary">
 
-      <button class="accordion active" id="searchBtn">Search</button>
-
-
-      <div class="panel">
-        <div class="search-container">
-          <div class="search">
-            <input type="text" placeholder="Search" id="search">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </div>
-          <div class="rounded-box">
-            Search in the box above to find a Pokemon!
+    <div class="topCont">
+      <div class="statDist">
+        <button class="accordion active" id="storyBtn">Story</button>
+        <button class="accordion" id="statBtn">Stat Dist</button>
+      </div>
+      <div class="searchBar" id="legendary">
+        <button class="accordion" id="searchBtn">Search</button>
+        <div class="panel">
+          <div class="search-container">
+            <div class="search">
+              <input type="text" placeholder="Search" id="search">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <div class="rounded-box">
+              Search in the box above to find a Pokemon!
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="endContainer">
-      <div class="statDist">
-        <button class="accordion" id="storyBtn">Story</button>
-        <button class="accordion" id="statBtn">Stat Dist</button>
-      </div>
-      <div class="credits">
-        <span id="madeby">Made by</span><br>
-        <span>lillestkittykat | miguelzinho | seenu</span>
-      </div>
+    <div class="credits">
+      <span id="madeby">Made by</span><br>
+      <span>lillestkittykat | miguelzinho | seenu</span>
     </div>
+
+
 
   </div>
   <div id="particle-container">
@@ -169,28 +168,21 @@
     </header>
     <section class="diagonal">
       <div class="wrapper">
-
         <h2 class="section-title">The Birth of Pokémon</h2>
-        <div class="buttons">
-          <button class="screenshot">Screenshot</button>
-          <button class="graph">Graph</button>
-        </div>
         <div class="entry">
-          <img src="images/diamond.jpg" alt="">
-          <canvas class="birthchart"></canvas>
           <p>In 1996, Pokémon made its debut with the release of Pokémon Red and Green for the Game Boy in Japan.
             Developed
             by Game Freak and published by Nintendo, Pokémon introduced players to a world teeming with mysterious
             creatures
             known as Pokémon. The goal was to become a Pokémon Trainer, capture Pokémon, train them, and compete against
             other Trainers.</p>
+          <div class="visContent" id="noback">
+            <img src="images/diamond.jpg" alt="">
+          </div>
         </div>
 
       </div>
     </section>
-
-
-
 
     <section class="diagonal" id="one">
       <div class="wrapper">
@@ -217,16 +209,18 @@
             <li>The introduction of held items for Pokémon.</li>
             <li>The ability to revisit the region from the previous generation.</li>
           </ul>
-          <div class="buttons">
-            <button class="chart" id='chart2' onclick="clicked(event)">Chart</button>
-            <button class='screenshot' id="screenshot2" onclick="clicked(event)">Screenshot</button>
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart2' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot2" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/gold.webp" alt="" id="img2">
+            <div class="gen2charts">
+              <canvas class="gen2types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <img src="images/gold.webp" alt="" id="img2">
-          <div class="gen2charts">
-            
-            <canvas class="gen2types"></canvas>
-          </div>
-          
+
         </div>
 
       </div>
@@ -245,15 +239,17 @@
             <li>The Battle Frontier, a post-game facility with various battle challenges.</li>
             <li>The Steel and Dark Types were added in this Generation.</li>
           </ul>
-          <div class="buttons">
-            <button class="chart">Chart</button>
-            <button class="screenshot">Screenshot</button>
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart3' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot3" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/ruby.webp" alt="" id="img3">
+            <div class="gen3charts">
+              <canvas class="gen3types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <div class="gen3charts">
-            <canvas class="gen3types"></canvas>
-
-          </div>
-          <img src="images/ruby.webp" alt="" id="noshadow">
         </div>
 
       </div>
@@ -270,11 +266,17 @@
             <li>Wi-Fi battles and trading, allowing players to connect and battle remotely.</li>
             <li>The Underground, a new feature for secret base customization and treasure hunting.</li>
           </ul>
-          <div class="gen4charts">
-            <canvas class="gen4types"></canvas>
-
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart4' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot4" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/diamond.jpg" alt="" id="img4">
+            <div class="gen4charts">
+              <canvas class="gen4types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <img src="images/diamond.jpg" alt="" id="noshadow">
         </div>
 
       </div>
@@ -291,11 +293,18 @@
             <li>The introduction of the Dream World, a feature for online activities and obtaining special Pokémon.</li>
             <li> The Pokémon World Tournament, featuring battles against iconic trainers from previous generations.</li>
           </ul>
-          <div class="gen5charts">
-            <canvas class="gen5types"></canvas>
-
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart5' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot5" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/bandw.jpg" alt="" id="img5">
+            <div class="gen5charts">
+              <canvas class="gen5types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <img src="images/bandw.jpg" alt="">
+          
         </div>
 
 
@@ -315,11 +324,17 @@
             <li>The introduction of the Fairy type, a new type that balanced the metagame.</li>
             <li>The Fairy type was added in this Generation.</li>
           </ul>
-          <div class="gen6charts">
-            <canvas class="gen6types"></canvas>
-
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart6' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot6" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/xandy.jpg" alt="" id="img6">
+            <div class="gen6charts">
+              <canvas class="gen6types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <img src="images/xandy.jpg" alt="" id="noshadow">
         </div>
 
       </div>
@@ -336,11 +351,17 @@
             <li>The introduction of Z-Moves, powerful special moves that can be used once per battle.</li>
             <li>The Rotom Pokédex, a talking Pokédex with additional features and interaction.</li>
           </ul>
-          <div class="gen7charts">
-            <canvas class="gen7types"></canvas>
-
+          <div class="visContent">
+            <div class="buttons">
+              <button class="chart" id='chart7' onclick="clicked(event)">Chart</button>
+              <button class='screenshot' id="screenshot7" onclick="clicked(event)">Screenshot</button>
+            </div>
+            <img src="images/sun.jpg" alt="" id="img7">
+            <div class="gen7charts">
+              <canvas class="gen7types"></canvas>
+              <h3 class="chart">Type Distribution</h3>
+            </div>
           </div>
-          <img src="images/sun.jpg" alt="" id="noshadow">
         </div>
 
       </div>
