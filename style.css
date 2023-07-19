@@ -176,9 +176,13 @@ li a {
   text-decoration: none;
   padding: 3px 5px;
 
-  text-shadow: 0px 0px 3px rgb(2, 2, 2);
+  text-shadow: 0px 0px 2px rgb(139, 139, 139);
   border-radius: 3px;
 
+}
+
+.rounded-box li {
+  margin-block: 10px;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */

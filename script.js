@@ -305,7 +305,7 @@ fetch('poke/pokedex.json')
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           let textColor = getColorForType(data[pokemonData[0] - 1].type[0]);
           console.log(textColor);
-          return `<li><a href="#" data-id="${pokemonData[0]}" style='color:rgb(${(textColor)}); background-color: rgba(${textColor}, 0.1); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
+          return `<li><a href="#" data-id="${pokemonData[0]}" style='color:black; background-color: rgba(${textColor}, 0.3); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
         }).join('');
 
         if (matchedPokemon.length > 8) {
