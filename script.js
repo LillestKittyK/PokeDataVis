@@ -108,7 +108,7 @@ fetch('poke/output.json')
       charts.push(pieChart);
       const canvas1 = document.querySelector(`.gen${generation}types`);
       new Chart(canvas1, pieChart);
-      console.log(`made chart ${generation}`);
+      
     }
 
 
@@ -172,7 +172,7 @@ buttons.forEach((button, index) => {
       });
 
       div.classList.toggle('selected');
-      console.log(button);
+      
       // Grab the number at the end of the button ID
       const buttonId = button.className;
 
@@ -207,7 +207,7 @@ buttons.forEach((button, index) => {
           break;
       }
 
-      console.log(genCount);
+      
 
 
       const images = await getPokeImages(number);
@@ -229,11 +229,11 @@ async function getPokeImages(generation) {
 
     data.forEach(entry => {
       if (entry.generation == generation) {
-        console.log(entry);
+        
         pokeList.push(entry.name);
       }
     });
-    console.log(pokeList);
+    
 
     const response2 = await fetch('poke/pokedex.json');
     const data2 = await response2.json();
@@ -279,10 +279,10 @@ fetch('poke/pokedex.json')
   .then(response => response.json())
   .then(data => {
     const result = data.map(item => [item.id, item.name.english]);
-    console.log(result);
+    
     const endTime = performance.now();
     const executionTime = endTime - startTime;
-    console.log(`Execution time: ${executionTime} milliseconds`);
+    
 
     document.getElementById('search').addEventListener('keyup', searchPokemon);
 
@@ -305,7 +305,7 @@ fetch('poke/pokedex.json')
         let listItems = matchedPokemon.slice(0, 8).map(item => {
           const pokemonData = result.find(dataItem => dataItem[1] === item.name.english);
           let textColor = getColorForType(data[pokemonData[0] - 1].type[0]);
-          console.log(textColor);
+          
           return `<li><a href="#" data-id="${pokemonData[0]}" style='color:black; background-color: rgba(${textColor}, 0.3); border: 1px solid rgb(${textColor})'>${pokemonData[1]}</a></li>`;
         }).join('');
 
@@ -334,7 +334,7 @@ fetch('poke/pokedex.json')
     }
 
     function displayPokemonInfo(pokemon) {
-      console.log(`displaying pokemon: ${pokemon.name.english}`);
+      
       searchButton.classList.add('active');
       storyButton.classList.remove('active');
       statDistButton.classList.remove('active');
@@ -358,8 +358,8 @@ fetch('poke/pokedex.json')
       // figure out if the pokemon is legendary
 
       let legendary = pokemon.species.includes("Legendary") || pokemon.description.includes("legendary");
-      console.log(pokemon.species);
-      console.log(`${pokemon.name} is Legendary? ${legendary}`);
+      
+      
       if (legendary) {
         if (!currentContainer.classList.contains('legendary')) {
           currentContainer.classList.add('legendary');
@@ -410,14 +410,14 @@ fetch('poke/pokedex.json')
           prevElement.style.display = 'flex';
           lineContainer.style.display = 'block';
           next = true;
-          console.log(`Next: ${pokemon.evolution.next[0][0]}`);
+          
           // console log that entry of the json with that id
           let id = pokemon.evolution.next[0][0] - 1;
           nextData = data[id];
           // turn id to an integer
           id = parseInt(id);
-          console.log(id);
-          console.log(data);
+          
+          
           nextName = data[id].name.english;
 
 
@@ -428,7 +428,8 @@ fetch('poke/pokedex.json')
           prevElement.style.display = 'flex';
           lineContainer.style.display = 'block';
           prev = true;
-          console.log(`Prev: ${pokemon.evolution.prev[0]}`);
+          
+          
           let id = pokemon.evolution.prev[0] - 1;
           prevData = data[id];
           id = parseInt(id);
@@ -447,8 +448,7 @@ fetch('poke/pokedex.json')
       chartCreated = 1;
 
       const typeImages = pokemon.type.map(type => `<img src="./images/type_${type.toLowerCase()}.png" alt="${type}" id="types">`).join('');
-      console.log(`prev: ${prevName}`);
-      console.log(`next: ${nextName}`);
+      
       displayElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
@@ -515,15 +515,14 @@ fetch('poke/pokedex.json')
       }
 
       if (next) {
-        console.log(nextData);
+        
         pokemon = nextData;
         bgColor = getColorForType(pokemon.type[0].toLowerCase());
         nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         nextElement.style.boxShadow = "2px 2px 10px #cacaca";
         nextElement.style.border = "1px solid #ccc";
         const typeImages = pokemon.type.map(type => `<img src="./images/type_${type.toLowerCase()}.png" alt="${type}" id="types">`).join('');
-        console.log(`prev: ${prevName}`);
-        console.log(`next: ${nextName}`);
+        
         nextElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
@@ -585,15 +584,14 @@ fetch('poke/pokedex.json')
         }
       }
       if (prev) {
-        console.log(prevData);
+        
         pokemon = prevData;
         bgColor = getColorForType(pokemon.type[0].toLowerCase());
         prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         prevElement.style.boxShadow = "2px 2px 10px #cacaca";
         prevElement.style.border = "1px solid #ccc";
         const typeImages = pokemon.type.map(type => `<img src="./images/type_${type.toLowerCase()}.png" alt="${type}" id="types">`).join('');
-        console.log(`prev: ${prevName}`);
-        console.log(`next: ${nextName}`);
+        
         prevElement.innerHTML = `
           <div class="display-header">
             <h3>${pokemon.name.english}</h3>
@@ -656,13 +654,11 @@ fetch('poke/pokedex.json')
       }
 
       if (pokemon.base) {
-        console.log(prevData);
+        
         if (prevData) { prevStats = [prevData.base.HP, prevData.base.Attack, prevData.base.Defense, prevData.base.Speed]; }
         let currentStats = [currentData.base.HP, currentData.base.Attack, currentData.base.Defense, currentData.base.Speed];
         if (nextData) { nextStats = [nextData.base.HP, nextData.base.Attack, nextData.base.Defense, nextData.base.Speed]; }
-        console.log(prevStats);
-        console.log(currentStats);
-        console.log(nextStats);
+        
 
 
         const chartData = {
@@ -710,11 +706,11 @@ fetch('poke/pokedex.json')
         }
 
 
-        console.log(chartData);
+        
         if (prevStats || nextStats) {
 
           if (evolveChart) {
-            console.log("Destroying chart");
+            
             evolveChart.destroy();
 
 
@@ -749,7 +745,7 @@ fetch('poke/pokedex.json')
           const ctxEvolve = evolveChartElement.getContext('2d');
           ctxEvolve.clearRect(0, 0, evolveChartElement.width, evolveChartElement.height);
         }
-        console.log("Code gets to here");
+        
       }
 
 
@@ -766,7 +762,7 @@ fetch('poke/pokedex.json')
 fetch('poke/output.json')
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    
 
     for (let i = 1; i < 8; i++) {
       function countOccurrences(data) {
@@ -797,7 +793,7 @@ fetch('poke/output.json')
 
 
       let typeCount = countOccurrences(data);
-      console.log(typeCount);
+      
 
 
       const canvas = document.getElementById(`statGraph${i}`);
@@ -825,7 +821,7 @@ fetch('poke/output.json')
         'dark': getColorForType('dark'),
         'flying': getColorForType('flying')
       };
-      console.log(typeColors);
+      
 
       const pieChart = new Chart(canvas, {
         type: 'pie',
