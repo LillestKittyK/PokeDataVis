@@ -62,8 +62,9 @@ fetch('poke/output.json')
       const newData = data.filter(pokemon => pokemon.generation == generation);
       const types = {};
       for (const pokemon of newData) {
-        const type1 = pokemon.type1;
-        const type2 = pokemon.type2;
+        const type1 = pokemon.type1.toLowerCase();
+        const type2 = pokemon.type2.toLowerCase();
+        console.log(type1);
 
         if (!types[type1]) {
           types[type1] = 0;
@@ -384,7 +385,7 @@ fetch('poke/pokedex.json')
 
       const iconContainer = document.querySelector('.icon');
       const lineContainer = document.querySelector('.lineContainer');
-      let bgColor = getColorForType(pokemon.type[0]);
+      let bgColor = getColorForType(pokemon.type[0].toLowerCase());
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
 
@@ -516,7 +517,7 @@ fetch('poke/pokedex.json')
       if (next) {
         console.log(nextData);
         pokemon = nextData;
-        bgColor = getColorForType(pokemon.type[0]);
+        bgColor = getColorForType(pokemon.type[0].toLowerCase());
         nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         nextElement.style.boxShadow = "2px 2px 10px #cacaca";
         nextElement.style.border = "1px solid #ccc";
@@ -586,7 +587,7 @@ fetch('poke/pokedex.json')
       if (prev) {
         console.log(prevData);
         pokemon = prevData;
-        bgColor = getColorForType(pokemon.type[0]);
+        bgColor = getColorForType(pokemon.type[0].toLowerCase());
         prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         prevElement.style.boxShadow = "2px 2px 10px #cacaca";
         prevElement.style.border = "1px solid #ccc";
