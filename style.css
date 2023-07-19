@@ -14,9 +14,10 @@ body {
 }
 
 #eevee {
-  font-size: 1rem;
-  padding: 5px;
+  font-size: 0.8rem;
+  padding: 0px;
   margin: 0px 5px;
+  height: auto;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid gray;
 
@@ -385,7 +386,7 @@ li a {
 }
 
 .images>img {
-  margin: 10px;
+  margin: 5px;
   width: 150px;
 
 }
@@ -440,9 +441,10 @@ li a {
 .images {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-
+  inset: 0;
+  padding: 0;
 
 }
 

@@ -31,8 +31,6 @@ storyButton.addEventListener("click", function (event) {
   storyContainer.style.display = "flex";
 });
 
-
-
 fetch("poke/output.json")
   .then((response) => response.json())
   .then((data) => {
@@ -292,8 +290,9 @@ fetch("poke/pokedex.json")
         }
 
         const numResults = matchedPokemon.length;
-        roundedBox.innerHTML = `<p id="numresults">${numResults} result${numResults > 1 ? "s" : ""
-          } found</p><ul>${listItems}</ul>`;
+        roundedBox.innerHTML = `<p id="numresults">${numResults} result${
+          numResults > 1 ? "s" : ""
+        } found</p><ul>${listItems}</ul>`;
 
         const links = roundedBox.querySelectorAll("a");
         links.forEach((link) => {
@@ -336,8 +335,7 @@ fetch("poke/pokedex.json")
         pokemon.species.includes("Legendary") ||
         pokemon.description.includes("legendary");
 
-      if (pokemon.name.english.toLowerCase() === 'eevee') {
-
+      if (pokemon.name.english.toLowerCase() === "eevee") {
         pokemon.evolution.next.forEach((evolution) => {
           const evolutionId = evolution[0];
           const evolutionPokemon = data.find((item) => item.id === evolutionId);
@@ -345,11 +343,12 @@ fetch("poke/pokedex.json")
             const imgSrc = evolutionPokemon.image.sprite;
 
             // Create a new div element
-            evolutionSources.push(`<img src="${imgSrc}" alt="${evolutionPokemon.name.english}" title="${evolutionPokemon.name.english}" />`);
+            evolutionSources.push(
+              `<img src="${imgSrc}" alt="${evolutionPokemon.name.english}" title="${evolutionPokemon.name.english}" />`
+            );
           }
         });
       }
-
 
       if (legendary) {
         if (!currentContainer.classList.contains("legendary")) {
@@ -444,19 +443,21 @@ fetch("poke/pokedex.json")
   <div class="images">
     <div class="type-images">${typeImages}</div>
     <img src="${pokemon.image.thumbnail}" alt="" id="big-image">
-    ${pokemon.name.english.toLowerCase() == "eevee"
-          ? `
+    
+    ${legendary ? `<p id="legendaryTitle">Legendary</p>` : "<p></p>"}
+  </div>
+  ${
+    pokemon.name.english.toLowerCase() == "eevee"
+      ? `
           <div id="eevee">
             <p>Fun fact: Eevee can evolve into many other Pokémon!</p><br>
           </div>`
-          : ""
-        }
-    ${legendary ? `<p id="legendaryTitle">Legendary</p>` : "<p></p>"}
-  </div>
+      : ""
+  }
   <canvas id="myChart"></canvas>
 `;
       const eevee = document.querySelector("#eevee");
-      if (pokemon.name.english.toLowerCase() == 'eevee') {
+      if (pokemon.name.english.toLowerCase() == "eevee") {
         let eevolutions = [];
         pokemon.evolution.next.forEach((evolution) => {
           const evolutionId = parseInt(evolution[0]);
@@ -465,7 +466,7 @@ fetch("poke/pokedex.json")
             const imgSrc = evolutionPokemon.image.sprite;
 
             // Create the img tag
-            const imgTag = document.createElement('img');
+            const imgTag = document.createElement("img");
             imgTag.src = imgSrc;
             imgTag.alt = evolutionPokemon.name.english;
             imgTag.title = evolutionPokemon.name.english;
@@ -480,8 +481,6 @@ fetch("poke/pokedex.json")
           eevee.appendChild(imgTag);
         });
       }
-
-
 
       if (pokemon.base) {
         if (myChart) {
