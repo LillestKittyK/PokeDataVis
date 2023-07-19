@@ -388,7 +388,7 @@ fetch('poke/pokedex.json')
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
 
-      iconContainer.innerHTML = `<img src='./images/icon${pokemon.type[0]}.png'></img>`
+      iconContainer.innerHTML = `<img src='./images/icon${pokemon.type[0].toLowerCase()}.png'></img>`
 
       prevElement.style.backgroundColor = 'transparent';
       nextElement.style.backgroundColor = 'transparent';
