@@ -64,7 +64,7 @@ fetch('poke/output.json')
       for (const pokemon of newData) {
         const type1 = pokemon.type1.toLowerCase();
         const type2 = pokemon.type2.toLowerCase();
-        console.log(type1);
+        console.log(`type 1 is ${type1} and type 2 is ${type2}`);
 
         if (!types[type1]) {
           types[type1] = 0;
