@@ -336,7 +336,7 @@ fetch("poke/pokedex.json")
           if (evolutionPokemon) {
             const imgSrc = evolutionPokemon.image.sprite;
 
-            // Create a new div element
+            
             evolutionSources.push(
               `<img src="${imgSrc}" alt="${evolutionPokemon.name.english}" title="${evolutionPokemon.name.english}" />`
             );
@@ -416,7 +416,7 @@ fetch("poke/pokedex.json")
 
       chartCreated = 1;
 
-      // Produce type images for the pokemon
+      
 
       const typeImages = pokemon.type
         .map(
@@ -425,7 +425,7 @@ fetch("poke/pokedex.json")
         )
         .join("");
 
-      // TODO : Add more types
+      
       const strengthsAndWeaknesses = getTypeAdvantagesAndWeaknesses(
         pokemon.type.slice(0, 2).map((type) => type.toLowerCase())
       );
@@ -445,7 +445,7 @@ fetch("poke/pokedex.json")
       typeStrengthsDiv.innerHTML = strengthsHTML;
       typeWeaknessesDiv.innerHTML = weaknessesHTML;
 
-      // const types = ["fire", "grass"]; // replace this with types from the pokemon
+      
 
       displayElement.innerHTML = `
   <div class="display-header">
@@ -481,18 +481,18 @@ fetch("poke/pokedex.json")
           if (evolutionPokemon) {
             const imgSrc = evolutionPokemon.image.sprite;
 
-            // Create the img tag
+            
             const imgTag = document.createElement("img");
             imgTag.src = imgSrc;
             imgTag.alt = evolutionPokemon.name.english;
             imgTag.title = evolutionPokemon.name.english;
 
-            // Add the img tag to the eevolutions array
+            
             eevolutions.push(imgTag);
           }
         });
 
-        // Add all the img tags to the code before the line that checks for the legendary variable
+        
         eevolutions.forEach((imgTag) => {
           eevee.appendChild(imgTag);
         });
@@ -1098,13 +1098,13 @@ function getTypeAdvantagesAndWeaknesses(types) {
     },
   };
 
-  // Check if valid types are provided
+  
   const validTypes = Object.keys(typeData);
   const selectedTypes = types.filter((type) =>
     validTypes.includes(type.toLowerCase())
   );
 
-  // Extract the strengths and weaknesses for each provided type
+  
   const strengths = selectedTypes.reduce((acc, type) => {
     return acc.concat(typeData[type.toLowerCase()].strongAgainst);
   }, []);
@@ -1116,8 +1116,8 @@ function getTypeAdvantagesAndWeaknesses(types) {
   return [Array.from(new Set(strengths)), Array.from(new Set(weaknesses))];
 }
 
-// Example usage:
+
 const types = ["fire", "grass"];
 const [strengths, weaknesses] = getTypeAdvantagesAndWeaknesses(types);
-console.log("Strengths:", strengths); // Output: Strengths: [ 'bug', 'steel', 'grass', 'ice' ]
-console.log("Weaknesses:", weaknesses); // Output: Weaknesses: [ 'ground', 'rock', 'water', 'flying', 'poison', 'bug', 'fire', 'ice' ]
+console.log("Strengths:", strengths); 
+console.log("Weaknesses:", weaknesses); 
