@@ -3,10 +3,7 @@ const searchContainer = document.querySelector("#content");
 const statDistContainer = document.querySelector(".statDistWindow");
 const storyContainer = document.querySelector(".storyEvo");
 
-var i;
-var currentlyOpen = null;
 let chartCreated = 0;
-let myChart = null;
 let evolveChart = null;
 
 const searchButton = document.querySelector("#searchBtn");
@@ -114,9 +111,6 @@ fetch("poke/output.json")
   });
 
 const buttonsContainer = document.querySelector(".buttons");
-const storyBtns = buttonsContainer.querySelectorAll("button");
-const gen2types = document.querySelector(".gen2types");
-const imgTwo = document.querySelector("#img2");
 
 function clicked(event) {
   const clickedButton = event.target;
