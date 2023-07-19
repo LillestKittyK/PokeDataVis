@@ -388,7 +388,7 @@ fetch('poke/pokedex.json')
       displayElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
       container.style.backgroundColor = `rgba(${bgColor}, 0.1)`;
 
-      iconContainer.innerHTML = `<img src='images/icon${pokemon.type[0]}.png'></img>`
+      iconContainer.innerHTML = `<img src='./images/icon${pokemon.type[0]}.png'></img>`
 
       prevElement.style.backgroundColor = 'transparent';
       nextElement.style.backgroundColor = 'transparent';
@@ -445,7 +445,7 @@ fetch('poke/pokedex.json')
       // console.log(`'chart created is ${chartCreated}'`)
       chartCreated = 1;
 
-      const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+      const typeImages = pokemon.type.map(type => `<img src="./images/type_${type}.png" alt="${type}" id="types">`).join('');
       console.log(`prev: ${prevName}`);
       console.log(`next: ${nextName}`);
       displayElement.innerHTML = `
@@ -520,7 +520,7 @@ fetch('poke/pokedex.json')
         nextElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         nextElement.style.boxShadow = "2px 2px 10px #cacaca";
         nextElement.style.border = "1px solid #ccc";
-        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+        const typeImages = pokemon.type.map(type => `<img src="./images/type_${type}.png" alt="${type}" id="types">`).join('');
         console.log(`prev: ${prevName}`);
         console.log(`next: ${nextName}`);
         nextElement.innerHTML = `
@@ -590,7 +590,7 @@ fetch('poke/pokedex.json')
         prevElement.style.backgroundColor = `rgba(${bgColor}, 0.5)`;
         prevElement.style.boxShadow = "2px 2px 10px #cacaca";
         prevElement.style.border = "1px solid #ccc";
-        const typeImages = pokemon.type.map(type => `<img src="images/type_${type}.png" alt="${type}" id="types">`).join('');
+        const typeImages = pokemon.type.map(type => `<img src="./images/type_${type}.png" alt="${type}" id="types">`).join('');
         console.log(`prev: ${prevName}`);
         console.log(`next: ${nextName}`);
         prevElement.innerHTML = `
