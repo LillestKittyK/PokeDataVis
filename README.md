@@ -6,7 +6,7 @@ In this story/website, we will be having
 - **Statistics**: The Distribution of Pokemon by Type 
 - **Pokedex**: The Main page. A guide to Pokémon stats. Contains all the stats of each Pokemon.
 
-  ## Description
+## Description
   Explaining each pach in detail...
  ### The Story.
 This page contains all the information/stories about the evolution of Pokemons.
