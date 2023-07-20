@@ -1,17 +1,18 @@
 ## Data story using the provided dataset
 
-In this story/website, we will be having
+In this story/website, you will find:
 
-- **The Story**: The Evolution of Pokemon
-- **Statistics**: The Distribution of Pokemon by Type 
-- **Pokedex**: The Main page. A guide to Pokémon stats. Contains all the stats of each Pokemon.
+- **The Story**: The Evolution of Pokémon
+- **Statistics**: The Distribution of Pokémon by Type 
+- **Pokedex**: The Main page. A guide to Pokémon stats. Contains all the stats of each Pokémon.
 
 ## Description
-  Explaining each pach in detail...
- ### The Story.
-This page contains all the information/stories about the evolution of Pokemons.
+  Explaining each part in detail:
 
-Table of content of this page
+ ### The Story.
+This page contains our story about the evolution of Pokémon.
+
+Table of contents of this page
 
 - The Birth of Pokémon
 - The Growth of Pokémon
@@ -24,21 +25,21 @@ Table of content of this page
 - Pokémon Go
 - And Much more...
 
-> **_NOTE:_**  The colors for each generation are chosen according to the official Pokemon colors.
+> **_NOTE:_**  The colors for each generation are chosen according to the official Pokémon colors.
 The entire story you'll find on the [site](https://lillestkittyk.github.io/PokeDataVis/)!
 
 ### Statistics
 
-The page where you can find the number of Pokemon introduced in each generation by type
+The page where you can find the number of Pokémon introduced in each generation, the type distribution across that generation and some of the new Pokémon introduced in that generation.
 
 ### Pokedex
 
-This is the main page of the site, you can search for any Pokemon here on this page and it will return all the info about the Pokemon.
-There are some easter eggs, which means we have taken some special care of some of the Pokemon you can find on the site.
+This is the main page of the site, you can search for any Pokémon here on this page and it will return all info about that Pokémon.
+There are some easter eggs - we have taken some special care of some of the Pokémon you can find on the site.
 
-***Hint***: A Pokemon can evolve into many types.
+***Hint***: Some Pokémon can evolve into many others.
 
-Also don't forget to check these Pokemon:
+Also don't forget to check these Pokémon:
 - Arcanine
 - Articuno
 - Zapdos
@@ -46,12 +47,12 @@ Also don't forget to check these Pokemon:
 
 ## Thought process behind the data story
 
-Have you ever wondered about having a site i.e. just like Ash in the Pokemon having **Dexture** which gives all the info about the Pokemon?
+Have you ever wondered about having a site i.e. just like Ash in the Pokémon having a **Pokédex** which gives all the info about the Pokémon?
 
-- So, we thought of doing the same a place where you can get all info about the Pokemon.
+- So, we thought of doing the same - a place where you can get all info about the Pokémon.
 
-- Personal note: We would have loved something like this when We were younger(1-10 years).
-- We are not too old lol.
+- Personal note: We would have loved something like this when we were younger!
+- (We are not too old lol)
 
 ## Algorithms/libraries used to generate the visualization
 - SCSS
@@ -68,14 +69,14 @@ https://lillestkittyk.github.io/PokeDataVis/
   
 ## Getting Started
 
-To use this code, you will need to download the repository and light up  the index.html.
+To use this code, you will need to download the repository and open up index.html.
 
 ### Errors debugging
 1. The auto-suggestion is not working.
    
 ![image](https://github.com/cnu1812/PokeDataVis/assets/75531528/67dac77f-003a-4b6b-8f5e-0ede4dec8bf2)
 
-**Solution**: Check your URL if it is like this `file:///C:/Users/Admin/Downloads/PokeDataVis/index.html`, change to `http://127.0.0.1:5500/index.html`
+**Solution**: Check your URL if it is like this `file:///C:/Users/Admin/Downloads/PokeDataVis/index.html` - if it is, use a Live Server and change to `http://127.0.0.1:5500/index.html` or as per your Live Server.
 
 2. Images aren't loading.
 ![image](https://github.com/cnu1812/PokeDataVis/assets/75531528/8c97b0d7-c2e1-48b8-9476-b1b373f960a0)
