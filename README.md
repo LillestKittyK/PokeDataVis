@@ -44,7 +44,14 @@ Also don't forget to check these Pokemon:
 - Zapdos
 - Moltres
 
+## Thought process behind the data story
 
+Have you ever wondered about having a site i.e. just like Ash in the Pokemon having **Dexture** which gives all the info about the Pokemon?
+
+- So, we thought of doing the same a place where you can get all info about the Pokemon.
+
+- Personal note: We would have loved something like this when We were younger(1-10 years).
+- We are not too old lol.
 
 ## Algorithms/libraries used to generate the visualization
 - SCSS
