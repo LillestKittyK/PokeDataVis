@@ -37,7 +37,7 @@ The page where you can find the number of Pokémon introduced in each generation
 This is the main page of the site, you can search for any Pokémon here on this page and it will return all info about that Pokémon.
 There are some easter eggs - we have taken some special care of some of the Pokémon you can find on the site.
 
-> **_Hint:_**: <span style="color: red;">**Some Pokémon can evolve into many others**.</span>
+> **_Hint:_**:**Some Pokémon can evolve into many others**.
 
 Also don't forget to check these Pokémon:
 - Arcanine
